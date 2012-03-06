@@ -27,7 +27,7 @@ au FilterWritePre * if &diff | exe 'noremap <space> ]cz.' | exe 'noremap <S-spac
 au FilterWritePre * if &diff | exe 'noremap <leader>g :diffget<CR>' | exe 'noremap <leader>p :diffput<CR>' | endif
 au FilterWritePre * if &diff | exe 'nmap <leader>u :wincmd l<CR>:normal u<CR>:wincmd h<CR>' | endif
 au FilterWritePre * if &diff | exe 'set diffopt=filler,context:1000,iwhite' | exe 'execute "normal \<c-w>\<c-w>"' | endif
-" | exe 'set diffopt=~iwhite'
+
 set diffexpr=MyDiff()
 function MyDiff()
    let opt = ""
@@ -40,6 +40,9 @@ function MyDiff()
    silent execute "!diff -a --binary " . opt . v:fname_in . " " . v:fname_new .
     \  " > " . v:fname_out
 endfunction
+
+" Switch between the last two files
+nnoremap <leader><leader> <c-^>
 
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
