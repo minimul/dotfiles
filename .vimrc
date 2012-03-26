@@ -41,7 +41,7 @@ function MyDiff()
     \  " > " . v:fname_out
 endfunction
 
-" Switch between the last two files
+" Switch/toggle between the last two files
 nnoremap <leader><leader> <c-^>
 
 " Use Vim settings, rather then Vi settings (much better!).
@@ -70,6 +70,15 @@ set autoread
 set number
 set scrolljump=5
 set scrolloff=3
+
+" ----- Window & Tab movement -----
+" Switch/toggle between split windows
+map <leader>w <c-w>w
+" Go to left vertical split
+map <leader>h <c-w>h<c-w><cr>
+" Go to right vertical split
+map <leader>l <c-w>l<c-w><cr>
+" Map up and down to horizontal split
 map <S-j> <C-W>j<C-W>_
 map <S-k> <C-W>k<C-W>_
 " remap the tab movement
@@ -77,6 +86,11 @@ map <S-l> gt
 map <S-h> gT
 " For Win32 Ctrl-y gets remapped to Ctrl-r (redo) Don't want that -- need to edit mswin.vim
 set wmh=0 " split don't have that xtra line
+" ---- Toggle between the last two active tabs
+let g:lasttab = 1
+nmap <Leader>t :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+
 map Q gq
 
 " This is an alternative that also works in block mode, but the deleted
@@ -101,7 +115,7 @@ if has("autocmd")
   " Highlights the line you are doing input in
   " autocmd InsertLeave * se nocul
   " autocmd InsertEnter * se cul
-
+  au BufWritePost *.coffee silent CoffeeMake! -b | cwindow | redraw!
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
   " (happens when dropping a file on gvim).
