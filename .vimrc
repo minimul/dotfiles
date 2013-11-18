@@ -14,9 +14,13 @@ if v:progname =~? "evim"
   finish
 endif
 
+execute pathogen#infect()
 let mapleader = ","
 map <leader>n :execute 'NERDTreeToggle ' . getcwd()<CR>
-"map <leader>f :FufFile<CR>
+map <leader>f :CommandT<CR>
+map <leader>f :CommandT<CR>
+" Emmit.vim modes
+map <leader>em <C-y>,
 "map <leader>t :FufCoverageFile<CR>
 " DirDiff settings
 let g:DirDiffExcludes = "system,CVS,*.class,*.exe,.*.swp"
@@ -60,16 +64,22 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
+set spell
 set autoindent
 set winheight=999 " new window always opens fully expanded
 set ignorecase
 set smartcase "overrides ignorecase if uppercase used
 " set nohlsearch
+set hlsearch
 syntax on
 set autoread
 set number
 set scrolljump=5
 set scrolloff=3
+
+map <C-h> :nohl<cr>
+" Make 'Y' consistent with 'C' & 'D'
+nnoremap Y y$
 
 " ----- Window & Tab movement -----
 " Switch/toggle between split windows
