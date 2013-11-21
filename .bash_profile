@@ -4,6 +4,7 @@
 #
 # echo "Loading ${HOME}/.bash_profile"
 source ~/.profile # Get the paths
+source ~/.bash/functions
 source ~/.bashrc  # get aliases
 #
 #- end

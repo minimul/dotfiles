@@ -21,7 +21,8 @@ map <leader>f :CommandT<CR>
 map <leader>f :CommandT<CR>
 " Emmit.vim modes
 map <leader>em <C-y>,
-"map <leader>t :FufCoverageFile<CR>
+map <leader>vr :FufCoverageFile<CR>
+map <Leader>vi :tabe ~/.vimrc<CR>
 " DirDiff settings
 let g:DirDiffExcludes = "system,CVS,*.class,*.exe,.*.swp"
 let g:DirDiffIgnore = "Id:,Revision:,Date:"
@@ -56,7 +57,7 @@ set backspace=indent,eol,start
 
 set noswapfile
 set nobackup		" do not keep a backup file, use versions instead
-set history=50		" keep 50 lines of command line history
+set history=500		" keep 500 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
@@ -76,6 +77,7 @@ set autoread
 set number
 set scrolljump=5
 set scrolloff=3
+set shellcmdflag=-lic
 
 map <C-h> :nohl<cr>
 " Make 'Y' consistent with 'C' & 'D'
