@@ -78,7 +78,7 @@ set number
 set scrolljump=5
 set scrolloff=3
 set nofoldenable " Say no to code folding...
-let $BASH_ENV = "~/.bash/aliases"
+let $BASH_ENV = "~/.bash_profile"
 
 map <C-h> :nohl<cr>
 map <C-s> <esc>:w<CR>
