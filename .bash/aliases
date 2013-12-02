@@ -1,0 +1,6 @@
+
+shopt -s expand_aliases # needed for integrating inside of vim
+alias be='bundle exec'
+alias bi='bundle install'
+alias bu='bundle update'
+alias flushdns='sudo killall -HUP mDNSResponder'

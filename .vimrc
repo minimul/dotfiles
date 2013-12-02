@@ -77,9 +77,12 @@ set autoread
 set number
 set scrolljump=5
 set scrolloff=3
-set shellcmdflag=-lic
+set nofoldenable " Say no to code folding...
+let $BASH_ENV = "~/.bash/aliases"
 
 map <C-h> :nohl<cr>
+map <C-s> <esc>:w<CR>
+imap <C-s> <esc>:w<CR>
 " Make 'Y' consistent with 'C' & 'D'
 nnoremap Y y$
 
@@ -174,5 +177,18 @@ else
 
 endif " has("autocmd")
 
+" Use Silver Searcher instead of grep
+set grepprg=ag
+"
+" " Get rid of the delay when hitting esc!
+set noesckeys
+
+" (Hopefully) removes the delay when hitting esc in insert mode
+set noesckeys
+set ttimeout
+set ttimeoutlen=1
+
 color desert
 highlight Search guifg=Black guibg=Red gui=bold
+" Highlight the status line
+highlight StatusLine ctermfg=blue ctermbg=yellow
