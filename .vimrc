@@ -16,12 +16,13 @@ endif
 
 execute pathogen#infect()
 let mapleader = ","
-map <leader>n :execute 'NERDTreeToggle ' . getcwd()<CR>
+map <leader>nt :execute 'NERDTreeToggle ' . getcwd()<CR>
+map <leader>nd :NERDTree %<CR>
+map <leader>ns :set nospell<CR>
+map <leader>sp :set spell<CR>
+map <leader>nl :set invnumber<CR>
 map <leader>f :CommandT<CR>
-map <leader>f :CommandT<CR>
-" Emmit.vim modes
-map <leader>em <C-y>,
-map <leader>vr :FufCoverageFile<CR>
+map <leader>em <C-y>, " Emmit.vim modes
 map <Leader>vi :tabe ~/.vimrc<CR>
 " DirDiff settings
 let g:DirDiffExcludes = "system,CVS,*.class,*.exe,.*.swp"
@@ -45,9 +46,6 @@ function MyDiff()
    silent execute "!diff -a --binary " . opt . v:fname_in . " " . v:fname_new .
     \  " > " . v:fname_out
 endfunction
-
-" Switch/toggle between the last two files
-nnoremap <leader><leader> <c-^>
 
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
