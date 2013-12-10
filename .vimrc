@@ -26,6 +26,7 @@ map <leader>em <C-y>, " Emmit.vim modes
 map <Leader>vi :tabe ~/.vimrc<CR>
 map <Leader>sp :set paste<CR>
 map <Leader>np :set nopaste<CR>
+map <Leader>vr :rightbelow vnew
 
 " DirDiff settings
 let g:DirDiffExcludes = "system,CVS,*.class,*.exe,.*.swp"
