@@ -24,6 +24,9 @@ map <leader>nl :set invnumber<CR>
 map <leader>f :CommandT<CR>
 map <leader>em <C-y>, " Emmit.vim modes
 map <Leader>vi :tabe ~/.vimrc<CR>
+map <Leader>sp :set paste<CR>
+map <Leader>np :set nopaste<CR>
+
 " DirDiff settings
 let g:DirDiffExcludes = "system,CVS,*.class,*.exe,.*.swp"
 let g:DirDiffIgnore = "Id:,Revision:,Date:"
