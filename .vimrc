@@ -19,7 +19,7 @@ let mapleader = ","
 map <leader>nt :execute 'NERDTreeToggle ' . getcwd()<CR>
 map <leader>nd :NERDTree %<CR>
 map <leader>ns :set nospell<CR>
-map <leader>sp :set spell<CR>
+map <leader>ss :set spell<CR>
 map <leader>nl :set invnumber<CR>
 map <leader>f :CommandT<CR>
 map <leader>em <C-y>, " Emmit.vim modes
@@ -34,8 +34,8 @@ let g:DirDiffIgnore = "Id:,Revision:,Date:"
 let g:DirDiffAddArgs = "-w"
 " Catch the transition to diff mode
 au FilterWritePre * if &diff | exe 'noremap <space> ]cz.' | exe 'noremap <S-space> [cz.' | endif
-au FilterWritePre * if &diff | exe 'noremap <leader>g :diffget<CR>' | exe 'noremap <leader>p :diffput<CR>' | endif
-au FilterWritePre * if &diff | exe 'nmap <leader>u :wincmd l<CR>:normal u<CR>:wincmd h<CR>' | endif
+au FilterWritePre * if &diff | exe 'noremap <leader>dg :diffget<CR>' | exe 'noremap <leader>dp :diffput<CR>' | endif
+au FilterWritePre * if &diff | exe 'nmap <leader>du :wincmd l<CR>:normal u<CR>:wincmd h<CR>' | endif
 au FilterWritePre * if &diff | exe 'set diffopt=filler,context:1000,iwhite' | exe 'execute "normal \<c-w>\<c-w>"' | endif
 
 set diffexpr=MyDiff()
