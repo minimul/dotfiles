@@ -2,3 +2,9 @@ function ts {
   args=$@
   tmux send-keys -t right "$args" C-m
 }
+
+# nts : "Note to self"
+function nts {
+  args=$@
+  mutt -s "$args" zarski@gmail.com < /dev/null
+}
