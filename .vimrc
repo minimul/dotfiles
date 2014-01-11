@@ -27,6 +27,9 @@ map <Leader>vi :tabe ~/.vimrc<CR>
 map <Leader>sp :set paste<CR>
 map <Leader>np :set nopaste<CR>
 map <Leader>vr :rightbelow vnew
+map <Leader>rt :w<cr>:call RunCurrentTest()<CR>
+map <Leader>rl :w<cr>:call RunCurrentLineInTest()<CR>
+map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<cr> " paste from clipboard
 
 " DirDiff settings
 let g:DirDiffExcludes = "system,CVS,*.class,*.exe,.*.swp"
@@ -63,11 +66,11 @@ set history=500		" keep 500 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
+set complete+=kspell
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-set spell
 set autoindent
 set winheight=999 " new window always opens fully expanded
 set ignorecase
@@ -142,6 +145,53 @@ endif
 
 map Q gq
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Test-running stuff
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RunCurrentTest()
+  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
+  if in_test_file
+    call SetTestFile()
+
+    if match(expand('%'), '\.feature$') != -1
+      call SetTestRunner("!bin/cucumber")
+      exec g:bjo_test_runner g:bjo_test_file
+    elseif match(expand('%'), '_spec\.rb$') != -1
+      call SetTestRunner("!bin/rspec")
+      exec g:bjo_test_runner g:bjo_test_file
+    else
+      call SetTestRunner("!ruby -Itest")
+      exec g:bjo_test_runner g:bjo_test_file
+    endif
+  else
+    exec g:bjo_test_runner g:bjo_test_file
+  endif
+endfunction
+
+function! SetTestRunner(runner)
+  let g:bjo_test_runner=a:runner
+endfunction
+
+function! RunCurrentLineInTest()
+  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
+  if in_test_file
+    call SetTestFileWithLine()
+  end
+
+  exec "!bin/rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
+endfunction
+
+function! SetTestFile()
+  let g:bjo_test_file=@%
+endfunction
+
+function! SetTestFileWithLine()
+  let g:bjo_test_file=@%
+  let g:bjo_test_file_line=line(".")
+endfunction
+
+"""""""""""""""""""""""""""""""""
+
 " This is an alternative that also works in block mode, but the deleted
 " text is lost and it only works for putting the current register.
 "vnoremap p "_dp
@@ -160,11 +210,11 @@ if has("autocmd")
   au!
 
   " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
+  " autocmd FileType text setlocal textwidth=78
   " Highlights the line you are doing input in
   " autocmd InsertLeave * se nocul
   " autocmd InsertEnter * se cul
-  au BufWritePost /Users/christian/www/jensen-dev/library/js/cs/*.coffee silent CoffeeMake! -b | cwindow | redraw!
+  autocmd BufRead,BufNewFile *.md setlocal spell
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
   " (happens when dropping a file on gvim).
