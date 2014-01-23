@@ -15,21 +15,35 @@ if v:progname =~? "evim"
 endif
 
 execute pathogen#infect()
+
 let mapleader = ","
 map <leader>nt :execute 'NERDTreeToggle ' . getcwd()<CR>
 map <leader>nd :NERDTree %<CR>
-map <leader>ns :set nospell<CR>
-map <leader>ss :set spell<CR>
+map <leader>ns :setlocal nospell<CR>
+map <leader>ss :setlocal spell<CR>
 map <leader>nl :set invnumber<CR>
+map <Leader>fc :call OpenFactoryFile()<CR>
 map <leader>f :CommandT<CR>
 map <leader>em <C-y>, " Emmit.vim modes
 map <Leader>vi :tabe ~/.vimrc<CR>
 map <Leader>sp :set paste<CR>
 map <Leader>np :set nopaste<CR>
 map <Leader>vr :rightbelow vnew
-map <Leader>rt :w<cr>:call RunCurrentTest()<CR>
-map <Leader>rl :w<cr>:call RunCurrentLineInTest()<CR>
+map <Leader>sr :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/ruby.snippets<CR>
+map <Leader>sj :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/javascript.snippets<CR>
+map <Leader>rt :w<cr>:call RunCurrentTest('!ts be rspec')<CR>
+map <Leader>rl :w<cr>:call RunCurrentLineInTest('!ts be rspec')<CR>
+map <Leader>zr :w<cr>:call RunCurrentTest('!ts zeus rspec')<CR>
+map <Leader>zl :w<cr>:call RunCurrentLineInTest('!ts zeus rspec')<CR>
+map <Leader>rn :call RenameFile()<cr>
 map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<cr> " paste from clipboard
+
+
+" Edit another file in the same directory as the current file
+" uses expression to extract path from current file's path
+map <Leader>ee :e <C-R>=expand("%:p:h") . '/'<CR>
+map <Leader>se :split <C-R>=expand("%:p:h") . '/'<CR>
+map <Leader>ve :vnew <C-R>=expand("%:p:h") . '/'<CR>
 
 " DirDiff settings
 let g:DirDiffExcludes = "system,CVS,*.class,*.exe,.*.swp"
@@ -148,7 +162,7 @@ map Q gq
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Test-running stuff
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! RunCurrentTest()
+function! RunCurrentTest(rspec_type)
   let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
   if in_test_file
     call SetTestFile()
@@ -157,7 +171,7 @@ function! RunCurrentTest()
       call SetTestRunner("!bin/cucumber")
       exec g:bjo_test_runner g:bjo_test_file
     elseif match(expand('%'), '_spec\.rb$') != -1
-      call SetTestRunner("!bin/rspec")
+      call SetTestRunner(a:rspec_type)
       exec g:bjo_test_runner g:bjo_test_file
     else
       call SetTestRunner("!ruby -Itest")
@@ -172,13 +186,13 @@ function! SetTestRunner(runner)
   let g:bjo_test_runner=a:runner
 endfunction
 
-function! RunCurrentLineInTest()
+function! RunCurrentLineInTest(rspec_type)
   let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
   if in_test_file
     call SetTestFileWithLine()
   end
 
-  exec "!bin/rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
+  exec a:rspec_type g:bjo_test_file . ":" . g:bjo_test_file_line
 endfunction
 
 function! SetTestFile()
@@ -188,6 +202,27 @@ endfunction
 function! SetTestFileWithLine()
   let g:bjo_test_file=@%
   let g:bjo_test_file_line=line(".")
+endfunction
+
+function! OpenFactoryFile()
+if filereadable("test/factories.rb")
+  execute ":sp test/factories.rb"
+else
+  execute ":sp spec/factories.rb"
+end
+endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RENAME CURRENT FILE (thanks Gary Bernhardt)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
 endfunction
 
 """""""""""""""""""""""""""""""""
@@ -204,6 +239,8 @@ if has("autocmd")
   " 'cindent' is on in C files, etc.
   " Also load indent files, to automatically do language-dependent indenting.
   filetype plugin indent on
+
+  " au FileType javascript call JavaScriptFold()
 
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
