@@ -31,12 +31,18 @@ map <Leader>np :set nopaste<CR>
 map <Leader>vr :rightbelow vnew
 map <Leader>sr :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/ruby.snippets<CR>
 map <Leader>sj :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/javascript.snippets<CR>
+map <Leader>sh :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/php.snippets<CR>
+map <Leader>ser :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/eruby.snippets<CR>
+map <Leader>tw :set textwidth=78<CR>
+map <Leader>rg :reg<CR>
 map <Leader>rt :w<cr>:call RunCurrentTest('!ts be rspec')<CR>
 map <Leader>rl :w<cr>:call RunCurrentLineInTest('!ts be rspec')<CR>
 map <Leader>zr :w<cr>:call RunCurrentTest('!ts zeus rspec')<CR>
 map <Leader>zl :w<cr>:call RunCurrentLineInTest('!ts zeus rspec')<CR>
 map <Leader>rn :call RenameFile()<cr>
 map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<cr> " paste from clipboard
+map <Leader>j 10j<CR>
+map <Leader>k 10k<CR>
 
 
 " Edit another file in the same directory as the current file
