@@ -16,6 +16,9 @@ endif
 
 execute pathogen#infect()
 
+" Enable built-in matchit plugin
+runtime macros/matchit.vim
+
 let mapleader = ","
 map <leader>nt :execute 'NERDTreeToggle ' . getcwd()<CR>
 map <leader>nd :NERDTree %<CR>
@@ -33,7 +36,7 @@ map <Leader>sr :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/ruby.snippet
 map <Leader>sj :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/javascript.snippets<CR>
 map <Leader>sh :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/php.snippets<CR>
 map <Leader>ser :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/eruby.snippets<CR>
-map <Leader>tw :set textwidth=78<CR>
+map <Leader>wd :set textwidth=78<CR>
 map <Leader>rg :reg<CR>
 map <Leader>rt :w<cr>:call RunCurrentTest('!ts be rspec')<CR>
 map <Leader>rl :w<cr>:call RunCurrentLineInTest('!ts be rspec')<CR>
@@ -41,8 +44,10 @@ map <Leader>zr :w<cr>:call RunCurrentTest('!ts zeus rspec')<CR>
 map <Leader>zl :w<cr>:call RunCurrentLineInTest('!ts zeus rspec')<CR>
 map <Leader>rn :call RenameFile()<cr>
 map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<cr> " paste from clipboard
-map <Leader>j 10j<CR>
-map <Leader>k 10k<CR>
+nnoremap <silent> <Plug>10DownMap 10j :call repeat#set("\<Plug>10DownMap")<CR>
+map <Leader>j <Plug>10DownMap
+nnoremap <silent> <Plug>10UpMap 10k :call repeat#set("\<Plug>10UpMap")<CR>
+map <Leader>k <Plug>10UpMap
 
 
 " Edit another file in the same directory as the current file
