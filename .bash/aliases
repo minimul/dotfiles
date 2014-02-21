@@ -10,6 +10,7 @@ alias gd='git di'
 alias gb='git br'
 alias gba='git br -a'
 alias gcm='git ci -m'
+alias gca='git ci -a'
 alias gcam='git ci -am'
 alias rc='rvm current'
 alias lss='ls -alt *.sess'
@@ -19,3 +20,5 @@ alias redis='/usr/local/redis-2.6.16/src/redis-server'
 alias rkiq='bundle exec sidekiq -q high,5 -q default, -c 1' # basic development sidekiq
 
 alias soa='source ~/.bash/aliases'
+alias voa='vim ~/.bash/aliases'
+alias coa='cat ~/.bash/aliases'
