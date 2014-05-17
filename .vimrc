@@ -46,9 +46,14 @@ map <Leader>rn :call RenameFile()<cr>
 map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<cr> " paste from clipboard
 nnoremap <silent> <Plug>10DownMap 10j :call repeat#set("\<Plug>10DownMap")<CR>
 map <Leader>j <Plug>10DownMap
+vnoremap <Leader>j <Plug>10DownMap
 nnoremap <silent> <Plug>10UpMap 10k :call repeat#set("\<Plug>10UpMap")<CR>
 map <Leader>k <Plug>10UpMap
-
+vnoremap <Leader>k <Plug>10UpMap
+nnoremap <silent> <Plug>3DownMap 3j :call repeat#set("\<Plug>3DownMap")<CR>
+map 3j <Plug>3DownMap
+nnoremap <silent> <Plug>3UpMap 3k :call repeat#set("\<Plug>3UpMap")<CR>
+map 3k <Plug>3UpMap
 
 " Edit another file in the same directory as the current file
 " uses expression to extract path from current file's path
@@ -185,7 +190,7 @@ function! RunCurrentTest(rspec_type)
       call SetTestRunner(a:rspec_type)
       exec g:bjo_test_runner g:bjo_test_file
     else
-      call SetTestRunner("!ruby -Itest")
+      call SetTestRunner(a:rspec_type)
       exec g:bjo_test_runner g:bjo_test_file
     endif
   else
@@ -263,6 +268,7 @@ if has("autocmd")
   " autocmd InsertLeave * se nocul
   " autocmd InsertEnter * se cul
   autocmd BufRead,BufNewFile *.md setlocal spell
+  autocmd FileType javascript setlocal expandtab shiftwidth=4 softtabstop=4
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
   " (happens when dropping a file on gvim).
