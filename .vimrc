@@ -1,14 +1,6 @@
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2002 Sep 19
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
-
+" Use Vim settings, rather then Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
   finish
@@ -37,23 +29,20 @@ map <Leader>sj :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/javascript.s
 map <Leader>sh :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/php.snippets<CR>
 map <Leader>ser :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/eruby.snippets<CR>
 map <Leader>wd :set textwidth=78<CR>
+map <Leader>ww ggVG<CR> " Visual block the whole page
+map <Leader>wv ggVGgq<CR> " Format entire page with textwidth=78
+map <Leader>cp :w<cr>:call CopyToOSClipboard()<CR>
 map <Leader>rg :reg<CR>
+map <Leader>dt :w<cr>:call RunCurrentTest('!ts spec/dummy/bin/rspec')<CR>
+map <Leader>dl :w<cr>:call RunCurrentLineInTest('!ts spec/dummy/bin/rspec')<CR>
+map <Leader>st :w<cr>:call RunCurrentTest('!ts bin/rspec')<CR>
+map <Leader>sl :w<cr>:call RunCurrentLineInTest('!ts bin/rspec')<CR>
 map <Leader>rt :w<cr>:call RunCurrentTest('!ts be rspec')<CR>
 map <Leader>rl :w<cr>:call RunCurrentLineInTest('!ts be rspec')<CR>
 map <Leader>zr :w<cr>:call RunCurrentTest('!ts zeus rspec')<CR>
 map <Leader>zl :w<cr>:call RunCurrentLineInTest('!ts zeus rspec')<CR>
 map <Leader>rn :call RenameFile()<cr>
 map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<cr> " paste from clipboard
-nnoremap <silent> <Plug>10DownMap 10j :call repeat#set("\<Plug>10DownMap")<CR>
-map <Leader>j <Plug>10DownMap
-vnoremap <Leader>j <Plug>10DownMap
-nnoremap <silent> <Plug>10UpMap 10k :call repeat#set("\<Plug>10UpMap")<CR>
-map <Leader>k <Plug>10UpMap
-vnoremap <Leader>k <Plug>10UpMap
-nnoremap <silent> <Plug>3DownMap 3j :call repeat#set("\<Plug>3DownMap")<CR>
-map 3j <Plug>3DownMap
-nnoremap <silent> <Plug>3UpMap 3k :call repeat#set("\<Plug>3UpMap")<CR>
-map 3k <Plug>3UpMap
 
 " Edit another file in the same directory as the current file
 " uses expression to extract path from current file's path
@@ -63,7 +52,7 @@ map <Leader>ve :vnew <C-R>=expand("%:p:h") . '/'<CR>
 
 " DirDiff settings
 let g:DirDiffExcludes = "system,CVS,*.class,*.exe,.*.swp"
-let g:DirDiffIgnore = "Id:,Revision:,Date:"
+let g:DirDiffIgnore = 'Id:,Revision:,Date:,File:,\\\$Id'
 let g:DirDiffAddArgs = "-w"
 " Catch the transition to diff mode
 au FilterWritePre * if &diff | exe 'noremap <space> ]cz.' | exe 'noremap <S-space> [cz.' | endif
@@ -71,6 +60,7 @@ au FilterWritePre * if &diff | exe 'noremap <leader>dg :diffget<CR>' | exe 'nore
 au FilterWritePre * if &diff | exe 'nmap <leader>du :wincmd l<CR>:normal u<CR>:wincmd h<CR>' | endif
 au FilterWritePre * if &diff | exe 'set diffopt=filler,context:1000,iwhite' | exe 'execute "normal \<c-w>\<c-w>"' | endif
 
+set ssop-=options  " do not store global and local values in a session" 
 set diffexpr=MyDiff()
 function MyDiff()
    let opt = ""
@@ -83,10 +73,8 @@ function MyDiff()
    silent execute "!diff -a --binary " . opt . v:fname_in . " " . v:fname_new .
     \  " > " . v:fname_out
 endfunction
+" End DirDiff settings
 
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
@@ -228,6 +216,11 @@ else
 end
 endfunction
 
+function! CopyToOSClipboard()
+  exec(":silent !cat % | pbcopy")
+  :redraw!
+endfunction
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE (thanks Gary Bernhardt)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -268,7 +261,8 @@ if has("autocmd")
   " autocmd InsertLeave * se nocul
   " autocmd InsertEnter * se cul
   autocmd BufRead,BufNewFile *.md setlocal spell
-  autocmd FileType javascript setlocal expandtab shiftwidth=4 softtabstop=4
+  au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null " type gg=G to pretty print xml
+  " autocmd FileType javascript setlocal expandtab shiftwidth=4 softtabstop=4
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
   " (happens when dropping a file on gvim).
