@@ -6,5 +6,5 @@ function ts {
 # nts : "Note to self"
 function nts {
   args=$@
-  mutt -s "$args" zarski@gmail.com < /dev/null
+  ~/scripts/note_to_self.rb "$args"
 }

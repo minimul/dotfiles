@@ -26,7 +26,7 @@ map <Leader>np :set nopaste<CR>
 map <Leader>vr :rightbelow vnew
 map <Leader>sr :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/ruby.snippets<CR>
 map <Leader>sj :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/javascript.snippets<CR>
-map <Leader>sh :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/php.snippets<CR>
+map <Leader>sc :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/coffee.snippets<CR>
 map <Leader>ser :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/eruby.snippets<CR>
 map <Leader>wd :set textwidth=78<CR>
 map <Leader>ww ggVG<CR> " Visual block the whole page
@@ -74,7 +74,9 @@ function MyDiff()
     \  " > " . v:fname_out
 endfunction
 " End DirDiff settings
-
+" Indenting options
+set comments +=fb:*,fb:[-],fb:[+]
+set fo +=n
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
@@ -221,6 +223,14 @@ function! CopyToOSClipboard()
   :redraw!
 endfunction
 
+fun! SetTextFile()
+  let in_minimul_dir = match(expand("%"), 'www\/minimul\/data') != -1
+  if in_minimul_dir
+    return
+  end
+  setlocal textwidth=78
+endfun
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE (thanks Gary Bernhardt)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -256,7 +266,8 @@ if has("autocmd")
   au!
 
   " For all text files set 'textwidth' to 78 characters.
-  " autocmd FileType text setlocal textwidth=78
+  autocmd BufRead,BufNewFile ~/www/minimul/data/*/* set syntax=html
+  autocmd FileType text call SetTextFile()
   " Highlights the line you are doing input in
   " autocmd InsertLeave * se nocul
   " autocmd InsertEnter * se cul
