@@ -75,8 +75,8 @@ function MyDiff()
 endfunction
 " End DirDiff settings
 " Indenting options
-set comments +=fb:*,fb:[-],fb:[+]
-set fo +=n
+set comments +=fb:*,fb:[-],fb:[+],fb:[1],fb:[2],fb:[3],fb:[4],fb:[5],fb:[6],n::
+set fo +=n2
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
@@ -226,9 +226,9 @@ endfunction
 fun! SetTextFile()
   let in_minimul_dir = match(expand("%"), 'www\/minimul\/data') != -1
   if in_minimul_dir
+    setlocal textwidth=78
     return
   end
-  setlocal textwidth=78
 endfun
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
