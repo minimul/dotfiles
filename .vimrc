@@ -33,6 +33,8 @@ map <Leader>ww ggVG<CR> " Visual block the whole page
 map <Leader>wv ggVGgq<CR> " Format entire page with textwidth=78
 map <Leader>cp :w<cr>:call CopyToOSClipboard()<CR>
 map <Leader>rg :reg<CR>
+map <Leader>wq Vapgq<CR>
+map <Leader>el :w<cr>:call RunCurrentExpressTest()<CR>
 map <Leader>dt :w<cr>:call RunCurrentTest('!ts spec/dummy/bin/rspec')<CR>
 map <Leader>dl :w<cr>:call RunCurrentLineInTest('!ts spec/dummy/bin/rspec')<CR>
 map <Leader>st :w<cr>:call RunCurrentTest('!ts bin/rspec')<CR>
@@ -42,7 +44,8 @@ map <Leader>rl :w<cr>:call RunCurrentLineInTest('!ts be rspec')<CR>
 map <Leader>zr :w<cr>:call RunCurrentTest('!ts zeus rspec')<CR>
 map <Leader>zl :w<cr>:call RunCurrentLineInTest('!ts zeus rspec')<CR>
 map <Leader>rn :call RenameFile()<cr>
-map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<cr> " paste from clipboard
+" Paste from clipboard
+map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<cr>
 
 " Edit another file in the same directory as the current file
 " uses expression to extract path from current file's path
@@ -62,7 +65,7 @@ au FilterWritePre * if &diff | exe 'set diffopt=filler,context:1000,iwhite' | ex
 
 set ssop-=options  " do not store global and local values in a session" 
 set diffexpr=MyDiff()
-function MyDiff()
+function! MyDiff()
    let opt = ""
    if &diffopt =~ "icase"
      let opt = opt . "-i "
@@ -75,7 +78,7 @@ function MyDiff()
 endfunction
 " End DirDiff settings
 " Indenting options
-set comments +=fb:*,fb:[-],fb:[+],fb:[1],fb:[2],fb:[3],fb:[4],fb:[5],fb:[6],n::
+set comments +=fb:*,fb:[-],fb:[+],fb:>>,fb:[1],fb:[2],fb:[3],fb:[4],fb:[5],fb:[6],n::
 set fo +=n2
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -133,7 +136,7 @@ au TabLeave * let g:lasttab = tabpagenr()
 
 " ---- Show tab number on the tabline
 if exists("+showtabline") 
-     function MyTabLine() 
+     function! MyTabLine() 
          let s = '' 
          let t = tabpagenr() 
          let i = 1 
@@ -168,6 +171,11 @@ map Q gq
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Test-running stuff
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RunCurrentExpressTest()
+  let ln = line(".")
+  exec '!ts ./bin/run %:' . ln
+endfunction
+
 function! RunCurrentTest(rspec_type)
   let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
   if in_test_file
@@ -226,8 +234,10 @@ endfunction
 fun! SetTextFile()
   let in_minimul_dir = match(expand("%"), 'www\/minimul\/data') != -1
   if in_minimul_dir
-    setlocal textwidth=78
+    setlocal textwidth=0
     return
+  else
+    setlocal textwidth=78
   end
 endfun
 
