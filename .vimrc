@@ -171,9 +171,15 @@ map Q gq
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Test-running stuff
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! Relpath(filename)
+  let cwd = getcwd()
+  let s = substitute(a:filename, l:cwd . "/" , "", "")
+  return s
+endfunction
+
 function! RunCurrentExpressTest()
   let ln = line(".")
-  exec '!ts ./bin/run %:' . ln
+  exec '!ts ./bin/run ' . Relpath(expand("%:p")) . ':' . ln
 endfunction
 
 function! RunCurrentTest(rspec_type)
