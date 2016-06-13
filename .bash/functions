@@ -8,3 +8,21 @@ function nts {
   args=$@
   ~/scripts/note_to_self.rb "$args"
 }
+
+function gdl {
+  if [ -z "$1" ]
+  then
+    back_commits=1
+  else
+    back_commits=$1
+  fi
+  if [ -z "$2" ]
+  then
+    new=
+  else
+    new=--diff-filter=A 
+  fi
+  cmd="git diff --name-only $new HEAD~$back_commits..HEAD"
+  echo $cmd
+  eval $cmd 
+}
