@@ -26,3 +26,17 @@ function gdl {
   echo $cmd
   eval $cmd 
 }
+
+function hcti {
+  if [ -z "$1" ]
+  then
+    suffix=
+  else
+    suffix=-prod
+  fi
+  cmd="heroku run \"bash -i -c 'echo set editing-mode vi > ~/.inputrc'; rails c\" --app=touritinerary$suffix"
+  echo $cmd
+  eval $cmd
+}
+
+# WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE BEFORE RUNNING

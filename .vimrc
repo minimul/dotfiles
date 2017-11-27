@@ -34,11 +34,14 @@ map <Leader>wv ggVGgq<CR> " Format entire page with textwidth=78
 map <Leader>cp :w<cr>:call CopyToOSClipboard()<CR>
 map <Leader>rg :reg<CR>
 map <Leader>wq Vapgq<CR>
-map <Leader>el :w<cr>:call RunCurrentExpressTest()<CR>
+map <Leader>cl :w<cr>:!ts phpunit --group focus<CR>
+map <Leader>el :w<cr>:call RunCurrentLineInExpressTest()<CR>
+map <Leader>et :w<cr>:call RunCurrentExpressTest()<CR>
 map <Leader>dt :w<cr>:call RunCurrentTest('!ts spec/dummy/bin/rspec')<CR>
 map <Leader>dl :w<cr>:call RunCurrentLineInTest('!ts spec/dummy/bin/rspec')<CR>
 map <Leader>st :w<cr>:call RunCurrentTest('!ts bin/rspec')<CR>
 map <Leader>sl :w<cr>:call RunCurrentLineInTest('!ts bin/rspec')<CR>
+map <Leader>rb :w<cr>:!ts ruby %<CR>
 map <Leader>rt :w<cr>:call RunCurrentTest('!ts be rspec')<CR>
 map <Leader>rl :w<cr>:call RunCurrentLineInTest('!ts be rspec')<CR>
 map <Leader>zr :w<cr>:call RunCurrentTest('!ts zeus rspec')<CR>
@@ -178,6 +181,10 @@ function! Relpath(filename)
 endfunction
 
 function! RunCurrentExpressTest()
+  exec '!ts ./bin/run ' . Relpath(expand("%:p"))
+endfunction
+
+function! RunCurrentLineInExpressTest()
   let ln = line(".")
   exec '!ts ./bin/run ' . Relpath(expand("%:p")) . ':' . ln
 endfunction
@@ -315,7 +322,9 @@ set noesckeys
 set ttimeout
 set ttimeoutlen=1
 
-color desert
+"set background=light
+"color desert
+colorscheme pyte
 highlight Search guifg=Black guibg=Red gui=bold
 " Highlight the status line
 highlight StatusLine ctermfg=blue ctermbg=yellow
