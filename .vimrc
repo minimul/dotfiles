@@ -137,6 +137,10 @@ let g:lasttab = 1
 nmap <Leader>t :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
+" Align GitHub-flavored Markdown tables
+" au FileType markdown,md 
+vmap <leader><Bar> :EasyAlign*<Bar><Enter>
+
 " ---- Show tab number on the tabline
 if exists("+showtabline") 
      function! MyTabLine() 
@@ -191,11 +195,15 @@ endfunction
 
 function! RunCurrentTest(rspec_type)
   let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
+  :echo in_test_file
   if in_test_file
     call SetTestFile()
 
     if match(expand('%'), '\.feature$') != -1
       call SetTestRunner("!bin/cucumber")
+      exec g:bjo_test_runner g:bjo_test_file
+    elseif match(expand('%'), '_test\.rb$') != -1
+      call SetTestRunner("!ts bin/rails test")
       exec g:bjo_test_runner g:bjo_test_file
     elseif match(expand('%'), '_spec\.rb$') != -1
       call SetTestRunner(a:rspec_type)
@@ -217,9 +225,14 @@ function! RunCurrentLineInTest(rspec_type)
   let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
   if in_test_file
     call SetTestFileWithLine()
+    if match(expand('%'), '_test\.rb$') != -1
+      call SetTestRunner("!ts bin/rails test")
+    else
+      call SetTestRunner(a:rspec_type)
+    endif
   end
 
-  exec a:rspec_type g:bjo_test_file . ":" . g:bjo_test_file_line
+  exec g:bjo_test_runner g:bjo_test_file . ":" . g:bjo_test_file_line
 endfunction
 
 function! SetTestFile()
