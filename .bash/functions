@@ -9,6 +9,14 @@ function nts {
   ~/scripts/note_to_self.rb "$args"
 }
 
+function gdd {
+  arg1=$([ -z "$1" ] && echo 1 || echo $1)
+  arg2=$([ -z "$2" ] && echo $2 || echo "--diff-filter=A")
+  cmd="git diff $arg2 HEAD~$arg1..HEAD"
+  echo $cmd
+  eval $cmd 
+}
+
 function gdl {
   if [ -z "$1" ]
   then
@@ -27,16 +35,39 @@ function gdl {
   eval $cmd 
 }
 
-function hcti {
-  if [ -z "$1" ]
-  then
-    suffix=
-  else
-    suffix=-prod
-  fi
-  cmd="heroku run \"bash -i -c 'echo set editing-mode vi > ~/.inputrc'; rails c\" --app=touritinerary$suffix"
+function bs() {
+  ag "$1" $(bundle show --paths)
+}
+
+function hcli {
+  app=$1
+  cmd="heroku run \"bash -i -c 'echo set editing-mode vi > ~/.inputrc'; rails c\" --app=$app"
   echo $cmd
   eval $cmd
 }
 
-# WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE BEFORE RUNNING
+function go-base {
+  url=$1
+  echo $url
+  shift
+  args=$@
+  params="$(ruby -r cgi -e 'puts CGI.escape(ARGV[0])' "$args")"
+  url=$(printf $url "$params")
+  cmd="w3m \"$url\""
+  eval $cmd 
+}
+
+function go-th {
+  go-base "https://words.bighugelabs.com/%s" $@
+}
+
+function go-l {
+  go-base "https://www.google.com/search?btnI&q=%s" $@
+}
+
+function go-g {
+  go-base "https://www.google.com/search?q=%s" $@
+}
+
+
+# WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE OR ~/.bash_profile BEFORE RUNNING
