@@ -18,23 +18,24 @@ map <leader>ns :setlocal nospell<CR>
 map <leader>ss :setlocal spell<CR>
 map <leader>nl :set invnumber<CR>
 map <Leader>fc :call OpenFactoryFile()<CR>
-map <leader>f :CommandT<CR>
 map <leader>em <C-y>, " Emmit.vim modes
 map <Leader>vi :tabe ~/.vimrc<CR>
 map <Leader>sp :set paste<CR>
 map <Leader>np :set nopaste<CR>
 map <Leader>vr :rightbelow vnew
-map <Leader>sr :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/ruby.snippets<CR>
-map <Leader>sj :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/javascript.snippets<CR>
-map <Leader>sc :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/coffee.snippets<CR>
-map <Leader>ser :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/eruby.snippets<CR>
+map <Leader>snru :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/ruby.snippets<CR>
+map <Leader>snjs :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/javascript/javascript.snippets<CR>
+map <Leader>snra :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/rails.snippets<CR>
+map <Leader>snhtml :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/html.snippets<CR>
+map <Leader>snerb :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/eruby.snippets<CR>
+map <Leader>snsh :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/sh.snippets<CR>
 map <Leader>wd :set textwidth=78<CR>
 map <Leader>ww ggVG<CR> " Visual block the whole page
 map <Leader>wv ggVGgq<CR> " Format entire page with textwidth=78
 map <Leader>cp :w<cr>:call CopyToOSClipboard()<CR>
 map <Leader>rg :reg<CR>
 map <Leader>wq Vapgq<CR>
-map <Leader>cl :w<cr>:!ts phpunit --group focus<CR>
+map <Leader>gr :!ts github-markdown-preview %<CR>
 map <Leader>el :w<cr>:call RunCurrentLineInExpressTest()<CR>
 map <Leader>et :w<cr>:call RunCurrentExpressTest()<CR>
 map <Leader>dt :w<cr>:call RunCurrentTest('!ts spec/dummy/bin/rspec')<CR>
@@ -44,8 +45,6 @@ map <Leader>sl :w<cr>:call RunCurrentLineInTest('!ts bin/rspec')<CR>
 map <Leader>rb :w<cr>:!ts ruby %<CR>
 map <Leader>rt :w<cr>:call RunCurrentTest('!ts be rspec')<CR>
 map <Leader>rl :w<cr>:call RunCurrentLineInTest('!ts be rspec')<CR>
-map <Leader>zr :w<cr>:call RunCurrentTest('!ts zeus rspec')<CR>
-map <Leader>zl :w<cr>:call RunCurrentLineInTest('!ts zeus rspec')<CR>
 map <Leader>rn :call RenameFile()<cr>
 " Paste from clipboard
 map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<cr>
@@ -56,6 +55,9 @@ map <Leader>ee :e <C-R>=expand("%:p:h") . '/'<CR>
 map <Leader>se :split <C-R>=expand("%:p:h") . '/'<CR>
 map <Leader>ve :vnew <C-R>=expand("%:p:h") . '/'<CR>
 
+" Twitvim
+let twitvim_browser_cmd = "open"
+
 " DirDiff settings
 let g:DirDiffExcludes = "system,CVS,*.class,*.exe,.*.swp"
 let g:DirDiffIgnore = 'Id:,Revision:,Date:,File:,\\\$Id'
@@ -65,6 +67,8 @@ au FilterWritePre * if &diff | exe 'noremap <space> ]cz.' | exe 'noremap <S-spac
 au FilterWritePre * if &diff | exe 'noremap <leader>dg :diffget<CR>' | exe 'noremap <leader>dp :diffput<CR>' | endif
 au FilterWritePre * if &diff | exe 'nmap <leader>du :wincmd l<CR>:normal u<CR>:wincmd h<CR>' | endif
 au FilterWritePre * if &diff | exe 'set diffopt=filler,context:1000,iwhite' | exe 'execute "normal \<c-w>\<c-w>"' | endif
+
+set rtp+=/usr/local/opt/fzf
 
 set ssop-=options  " do not store global and local values in a session" 
 set diffexpr=MyDiff()
@@ -110,6 +114,7 @@ set scrolljump=5
 set scrolloff=3
 set nofoldenable " Say no to code folding...
 let $BASH_ENV = "~/.bash_profile"
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 map <C-h> :nohl<cr>
 map <C-s> <esc>:w<CR>
