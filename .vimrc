@@ -1,15 +1,16 @@
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
+
 set nocompatible
-" When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
-  finish
-endif
+" Allow us to use Ctrl-s and Ctrl-q as keybinds
+" silent !stty -ixon
+
+" Restore default behaviour when leaving Vim.
+" autocmd VimLeave * silent !stty ixon
 
 execute pathogen#infect()
 
-" Enable built-in matchit plugin
-runtime macros/matchit.vim
+filetype plugin indent on
+
+runtime macros/matchit.vim " Enable built-in matchit plugin
 
 let mapleader = ","
 map <leader>nt :execute 'NERDTreeToggle ' . getcwd()<CR>
@@ -35,16 +36,16 @@ map <Leader>wv ggVGgq<CR> " Format entire page with textwidth=78
 map <Leader>cp :w<cr>:call CopyToOSClipboard()<CR>
 map <Leader>rg :reg<CR>
 map <Leader>wq Vapgq<CR>
-map <Leader>gr :!ts github-markdown-preview %<CR>
+map <Leader>gr :RunInInteractiveShell ts github-markdown-preview %<CR>
 map <Leader>el :w<cr>:call RunCurrentLineInExpressTest()<CR>
 map <Leader>et :w<cr>:call RunCurrentExpressTest()<CR>
-map <Leader>dt :w<cr>:call RunCurrentTest('!ts spec/dummy/bin/rspec')<CR>
-map <Leader>dl :w<cr>:call RunCurrentLineInTest('!ts spec/dummy/bin/rspec')<CR>
-map <Leader>st :w<cr>:call RunCurrentTest('!ts bin/rspec')<CR>
-map <Leader>sl :w<cr>:call RunCurrentLineInTest('!ts bin/rspec')<CR>
-map <Leader>rb :w<cr>:!ts ruby %<CR>
-map <Leader>rt :w<cr>:call RunCurrentTest('!ts be rspec')<CR>
-map <Leader>rl :w<cr>:call RunCurrentLineInTest('!ts be rspec')<CR>
+map <Leader>dt :w<cr>:call RunCurrentTest('RunInInteractiveShell ts spec/dummy/bin/rspec')<CR>
+map <Leader>dl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts spec/dummy/bin/rspec')<CR>
+map <Leader>st :w<cr>:call RunCurrentTest('RunInInteractiveShell ts bin/rspec')<CR>
+map <Leader>sl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts bin/rspec')<CR>
+map <Leader>rb :w<cr>:RunInInteractiveShell ts ruby %<CR>
+map <Leader>rt :w<cr>:call RunCurrentTest('RunInInteractiveShell ts be rspec')<CR>
+map <Leader>rl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts be rspec')<CR>
 map <Leader>rn :call RenameFile()<cr>
 " Paste from clipboard
 map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<cr>
@@ -55,40 +56,21 @@ map <Leader>ee :e <C-R>=expand("%:p:h") . '/'<CR>
 map <Leader>se :split <C-R>=expand("%:p:h") . '/'<CR>
 map <Leader>ve :vnew <C-R>=expand("%:p:h") . '/'<CR>
 
-" Twitvim
-let twitvim_browser_cmd = "open"
+nnoremap <leader>ri :RunInInteractiveShell<space>
 
-" DirDiff settings
-let g:DirDiffExcludes = "system,CVS,*.class,*.exe,.*.swp"
-let g:DirDiffIgnore = 'Id:,Revision:,Date:,File:,\\\$Id'
-let g:DirDiffAddArgs = "-w"
-" Catch the transition to diff mode
-au FilterWritePre * if &diff | exe 'noremap <space> ]cz.' | exe 'noremap <S-space> [cz.' | endif
-au FilterWritePre * if &diff | exe 'noremap <leader>dg :diffget<CR>' | exe 'noremap <leader>dp :diffput<CR>' | endif
-au FilterWritePre * if &diff | exe 'nmap <leader>du :wincmd l<CR>:normal u<CR>:wincmd h<CR>' | endif
-au FilterWritePre * if &diff | exe 'set diffopt=filler,context:1000,iwhite' | exe 'execute "normal \<c-w>\<c-w>"' | endif
+" Twitvim
+let twitvim_browser_cmd = 'w3m'
+let twitvim_browser_fork = "w3m"
 
 set rtp+=/usr/local/opt/fzf
 
 set ssop-=options  " do not store global and local values in a session" 
-set diffexpr=MyDiff()
-function! MyDiff()
-   let opt = ""
-   if &diffopt =~ "icase"
-     let opt = opt . "-i "
-   endif
-   if &diffopt =~ "iwhite"
-     let opt = opt . "--ignore-all-space "
-   endif
-   silent execute "!diff -a --binary " . opt . v:fname_in . " " . v:fname_new .
-    \  " > " . v:fname_out
-endfunction
-" End DirDiff settings
+
 " Indenting options
 set comments +=fb:*,fb:[-],fb:[+],fb:>>,fb:[1],fb:[2],fb:[3],fb:[4],fb:[5],fb:[6],n::
 set fo +=n2
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
+
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
 
 set noswapfile
 set nobackup		" do not keep a backup file, use versions instead
@@ -105,7 +87,6 @@ set autoindent
 set winheight=999 " new window always opens fully expanded
 set ignorecase
 set smartcase "overrides ignorecase if uppercase used
-" set nohlsearch
 set hlsearch
 syntax on
 set autoread
@@ -113,39 +94,27 @@ set number
 set scrolljump=5
 set scrolloff=3
 set nofoldenable " Say no to code folding...
-let $BASH_ENV = "~/.bash_profile"
+" let $BASH_ENV = "~/.bash_profile"
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 map <C-h> :nohl<cr>
 map <C-s> <esc>:w<CR>
 imap <C-s> <esc>:w<CR>
-" Make 'Y' consistent with 'C' & 'D'
-nnoremap Y y$
+nnoremap Y y$ " Make 'Y' consistent with 'C' & 'D'
 
-" ----- Window & Tab movement -----
-" Switch/toggle between split windows
-map <leader>w <c-w>w
-" Go to left vertical split
-map <leader>h <c-w>h<c-w><cr>
-" Go to right vertical split
-map <leader>l <c-w>l<c-w><cr>
-" Map up and down to horizontal split
-map <S-j> <C-W>j<C-W>_
-map <S-k> <C-W>k<C-W>_
-" remap the tab movement
-map <S-l> gt
-map <S-h> gT
-" For Win32 Ctrl-y gets remapped to Ctrl-r (redo) Don't want that -- need to edit mswin.vim
 set wmh=0 " split don't have that xtra line
-" ---- Toggle between the last two active tabs
-let g:lasttab = 1
+map <leader>w <c-w>w " Switch/toggle between split windows
+map <leader>h <c-w>h<c-w><cr> " Go to left vertical split
+map <leader>l <c-w>l<c-w><cr> " Go to right vertical split
+
+map <S-j> <C-W>j<C-W>_ " Map up and down to horizontal split
+map <S-k> <C-W>k<C-W>_
+
+map <S-l> gt " remap the tab movement
+map <S-h> gT
+let g:lasttab = 1 " ---- Toggle between the last two active tabs
 nmap <Leader>t :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
-
-" Align GitHub-flavored Markdown tables
-" au FileType markdown,md 
-vmap <leader><Bar> :EasyAlign*<Bar><Enter>
-
 " ---- Show tab number on the tabline
 if exists("+showtabline") 
      function! MyTabLine() 
@@ -178,6 +147,8 @@ if exists("+showtabline")
      set tabline=%!MyTabLine() 
 endif 
 
+
+vmap <leader><Bar> :EasyAlign*<Bar><Enter> " Align GitHub-flavored Markdown tables
 map Q gq
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -190,25 +161,22 @@ function! Relpath(filename)
 endfunction
 
 function! RunCurrentExpressTest()
-  exec '!ts ./bin/run ' . Relpath(expand("%:p"))
+  exec 'RunInInteractiveShell ts ./bin/run ' . Relpath(expand("%:p"))
 endfunction
 
 function! RunCurrentLineInExpressTest()
   let ln = line(".")
-  exec '!ts ./bin/run ' . Relpath(expand("%:p")) . ':' . ln
+  exec 'RunInInteractiveShell ts ./bin/run ' . Relpath(expand("%:p")) . ':' . ln
 endfunction
 
 function! RunCurrentTest(rspec_type)
-  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
+  let in_test_file = match(expand("%"), '\(_spec.rb\|_test.rb\)$') != -1
   :echo in_test_file
   if in_test_file
     call SetTestFile()
 
-    if match(expand('%'), '\.feature$') != -1
-      call SetTestRunner("!bin/cucumber")
-      exec g:bjo_test_runner g:bjo_test_file
-    elseif match(expand('%'), '_test\.rb$') != -1
-      call SetTestRunner("!ts bin/rails test")
+    if match(expand('%'), '_test\.rb$') != -1
+      call SetTestRunner("RunInInteractiveShell ts bin/rails test")
       exec g:bjo_test_runner g:bjo_test_file
     elseif match(expand('%'), '_spec\.rb$') != -1
       call SetTestRunner(a:rspec_type)
@@ -227,11 +195,11 @@ function! SetTestRunner(runner)
 endfunction
 
 function! RunCurrentLineInTest(rspec_type)
-  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
+  let in_test_file = match(expand("%"), '\(_spec.rb\|_test.rb\)$') != -1
   if in_test_file
     call SetTestFileWithLine()
     if match(expand('%'), '_test\.rb$') != -1
-      call SetTestRunner("!ts bin/rails test")
+      call SetTestRunner("RunInInteractiveShell ts bin/rails test")
     else
       call SetTestRunner(a:rspec_type)
     endif
@@ -287,47 +255,14 @@ endfunction
 
 """""""""""""""""""""""""""""""""
 
-" This is an alternative that also works in block mode, but the deleted
-" text is lost and it only works for putting the current register.
-"vnoremap p "_dp
+autocmd BufRead,BufNewFile ~/www/minimul/data/*/* set syntax=html
+autocmd FileType text call SetTextFile() " For all text files set 'textwidth' to 78 characters.
+autocmd BufRead,BufNewFile *.md setlocal spell
+autocmd BufReadPost *
+  \ if line("'\"") > 0 && line("'\"") <= line("$") |
+  \   exe "normal g`\"" |
+  \ endif
 
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
-
-  " au FileType javascript call JavaScriptFold()
-
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-  au!
-
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd BufRead,BufNewFile ~/www/minimul/data/*/* set syntax=html
-  autocmd FileType text call SetTextFile()
-  " Highlights the line you are doing input in
-  " autocmd InsertLeave * se nocul
-  " autocmd InsertEnter * se cul
-  autocmd BufRead,BufNewFile *.md setlocal spell
-  au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null " type gg=G to pretty print xml
-  " autocmd FileType javascript setlocal expandtab shiftwidth=4 softtabstop=4
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
-
-  augroup END
-
-else
-
-endif " has("autocmd")
 
 " Use Silver Searcher instead of grep
 set grepprg=ag
@@ -340,8 +275,6 @@ set noesckeys
 set ttimeout
 set ttimeoutlen=1
 
-"set background=light
-"color desert
 colorscheme pyte
 highlight Search guifg=Black guibg=Red gui=bold
 " Highlight the status line

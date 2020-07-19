@@ -9,6 +9,11 @@ function nts {
   ~/scripts/note_to_self.rb "$args"
 }
 
+function ntc {
+  args=$@
+  ~/scripts/note_to_self.rb -t cpelczarski@gmail.com "$args"
+}
+
 function gdd {
   arg1=$([ -z "$1" ] && echo 1 || echo $1)
   arg2=$([ -z "$2" ] && echo $2 || echo "--diff-filter=A")

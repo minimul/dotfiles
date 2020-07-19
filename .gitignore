@@ -1,0 +1,11 @@
+*
+!.bash*
+.bash_history
+!.elinks*
+!.gemrc
+!.inputrc
+!.irbrc
+!.tmux.conf
+!.tmuxgo
+!.tmuxgo-rails
+!.vimrc
