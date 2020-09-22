@@ -45,10 +45,12 @@ map <Leader>st :w<cr>:call RunCurrentTest('RunInInteractiveShell ts bin/rspec')<
 map <Leader>sl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts bin/rspec')<CR>
 map <Leader>rb :w<cr>:RunInInteractiveShell ts ruby %<CR>
 map <Leader>rt :w<cr>:call RunCurrentTest('RunInInteractiveShell ts be rspec')<CR>
+map <Leader>rs :w<cr>:RunInInteractiveShell ts be standardrb %<CR>
 map <Leader>rl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts be rspec')<CR>
+map <Leader>rbp :w<cr>:execute '!rbprettier --write %'<CR>
 map <Leader>rn :call RenameFile()<cr>
 " Paste from clipboard
-map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<cr>
+map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<CR>:retab<CR>
 
 " Edit another file in the same directory as the current file
 " uses expression to extract path from current file's path
