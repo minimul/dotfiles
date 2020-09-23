@@ -24,12 +24,11 @@ map <Leader>vi :tabe ~/.vimrc<CR>
 map <Leader>sp :set paste<CR>
 map <Leader>np :set nopaste<CR>
 map <Leader>vr :rightbelow vnew
-map <Leader>snru :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/ruby.snippets<CR>
-map <Leader>snjs :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/javascript/javascript.snippets<CR>
-map <Leader>snra :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/rails.snippets<CR>
-map <Leader>snhtml :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/html.snippets<CR>
-map <Leader>snerb :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/eruby.snippets<CR>
-map <Leader>snsh :rightbelow vnew ~/.vim/bundle/vim-snippets/snippets/sh.snippets<CR>
+map <Leader>snru :rightbelow vnew ~/.vim/snippets/ruby.snippets<CR>
+map <Leader>snjs :rightbelow vnew ~/.vim/snippets/javascript.snippets<CR>
+map <Leader>snra :rightbelow vnew ~/.vim/rails.snippets<CR>
+map <Leader>snerb :rightbelow vnew ~/.vim/snippets/snippets/eruby.snippets<CR>
+map <Leader>snsh :rightbelow vnew ~/.vim/snippets/snippets/sh.snippets<CR>
 map <Leader>wd :set textwidth=78<CR>
 map <Leader>ww ggVG<CR> " Visual block the whole page
 map <Leader>wv ggVGgq<CR> " Format entire page with textwidth=78
@@ -46,6 +45,7 @@ map <Leader>sl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts bin/rs
 map <Leader>rb :w<cr>:RunInInteractiveShell ts ruby %<CR>
 map <Leader>rt :w<cr>:call RunCurrentTest('RunInInteractiveShell ts be rspec')<CR>
 map <Leader>rs :w<cr>:RunInInteractiveShell ts be standardrb %<CR>
+map <Leader>rsa :w<cr>:RunInInteractiveShell ts be standardrb<CR>
 map <Leader>rl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts be rspec')<CR>
 map <Leader>rbp :w<cr>:execute '!rbprettier --write %'<CR>
 map <Leader>rn :call RenameFile()<cr>
@@ -65,6 +65,7 @@ let twitvim_browser_cmd = 'w3m'
 let twitvim_browser_fork = "w3m"
 
 set rtp+=/usr/local/opt/fzf
+set rtp+=~/.vim/snippets
 
 set ssop-=options  " do not store global and local values in a session" 
 
