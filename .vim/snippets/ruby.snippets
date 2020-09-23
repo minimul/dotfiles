@@ -1,0 +1,27 @@
+snippet cla class .. end
+	class ${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`}
+		${0}
+	end
+snippet clai class .. initialize .. end
+	class ${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`}
+		def initialize(${2:args})
+			${0}
+		end
+	end
+snippet cla-
+	class ${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`} < DelegateClass(${2:ParentClass})
+		def initialize(${3:args})
+			super(${4:del_obj})
+
+			${0}
+		end
+	end
+snippet mod module .. end
+	module ${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`}
+		${0}
+	end
+# attr_reader
+snippet r
+	attr_reader :${0:attr_names}
+
+extends rails

@@ -1,0 +1,53 @@
+snippet cl
+	console.log(${0})
+snippet cd
+	console.dir(${0})
+snippet =>
+	(${1}) => {
+		${0:${VISUAL}}
+	}
+snippet af "() =>"
+	(${1}) => ${0:${VISUAL}}
+snippet afb "() => {}"
+	(${1}) => {
+		${0:${VISUAL}}
+	}
+snippet ife "if (condition) { ... } else { ... }"
+	if (${1:true}) {
+		${0:${VISUAL}}
+	} else {
+		${2}
+	}
+snippet switch
+	switch (${1:expression}) {
+		case '${3:case}':
+			${4}
+			break;
+		${0}
+		default:
+			${2}
+	}
+snippet jsonp
+	JSON.parse(${0:jstr});
+# JSON.stringify
+snippet jsons
+	JSON.stringify(${0:object});
+# DOM selectors
+# Get elements
+snippet get
+	getElementsBy${1:TagName}('${0}')
+# Get element
+snippet gett
+	getElementBy${1:Id}('${0}')
+# Elements by class
+snippet by.
+	${1:document}.getElementsByClassName('${0:class}')
+# Element by ID
+snippet by#
+	${1:document}.getElementById('${0:element ID}')
+# Query selector
+snippet qs
+	${1:document}.querySelector('${0:CSS selector}')
+# Query selector all
+snippet qsa
+	${1:document}.querySelectorAll('${0:CSS selector}')
