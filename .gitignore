@@ -4,7 +4,11 @@
 !.vim/
 .vim/*
 !.vim/snippets
-!.elinks/
+!.w3m/
+.w3m/*
+!.w3m/bookmark.html
+!.w3m/config
+!.w3m/keymap
 !.bash/
 !.bashrc
 !.bash_profile

@@ -1,0 +1,21 @@
+display_link 1
+default_url 0
+display_borders 1
+display_image 0
+mark_all_pages 1
+
+color 1
+basic_color terminal
+anchor_color green
+image_color cyan
+form_color red
+mark_color yellow
+bg_color terminal
+
+extbrowser open -a "Google Chrome" %s &
+extbrowser3 url=%s out_file=~/.notes && echo @url $url >> $out_file && echo $url saved to $out_file && read s
+extbrowser5 url=$(echo %s | sed 's/\\\|\//\\&/g') && sed -i "1,/End\sof\ssection/s/.*End\sof/<li><a href=$url>$url<\/a>\n&/g" ~/.w3m/bookmark.html && echo $url saved to bookmarks && read s
+extbrowser6 wget -c
+extbrowser7 url=%s && printf %s "$url" | xargs tmux set-buffer
+extbrowser8 url=%s && printf %s "$url" | xsel && printf %s "$url" | xsel -b &
+extbrowser9 mpv %s &

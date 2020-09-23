@@ -1,0 +1,72 @@
+
+keymap  C-@ MARK
+keymap  C-c SUBMIT
+keymap  C-d NEXT_PAGE
+keymap  C-e UP
+keymap  C-g LINE_INFO
+keymap  C-t NEW_TAB
+keymap  C-u PREV_PAGE
+keymap  C-w CLOSE_TAB
+keymap  C-y DOWN
+
+keymap  SPC NEXT_PAGE
+keymap  +   NEXT_PAGE
+keymap  -   PREV_PAGE
+keymap  .   NEXT
+# Mark URL-like strings as anchors
+keymap  :   MARK_URL
+# Mark current word as URL
+keymap  ";" MARK_WORD
+# INFO includes the page response HTTP header
+keymap  =   INFO
+keymap  B   BACK
+# Edit source
+keymap  E   EDIT
+keymap  G   END
+keymap  J   UP
+keymap  K   DOWN
+keymap  /   SEARCH
+keymap  N   SEARCH_PREV
+keymap  R   RELOAD
+keymap  S   SAVE_SCREEN
+keymap  T   TAB_LINK
+keymap  W   PREV_WORD
+keymap  a   SAVE_LINK
+keymap  b   BACK
+keymap  c   PEEK
+keymap  g   BEGIN
+keymap  j   MOVE_DOWN
+keymap  k   MOVE_UP
+keymap  l   MOVE_RIGHT
+keymap  n   SEARCH_NEXT
+keymap  s   SELECT_MENU
+keymap  t   TAB_LINK
+keymap  u   PEEK_LINK
+keymap  v   VIEW
+keymap  w   NEXT_WORD
+keymap  z   CENTER_V
+keymap  {   PREV_TAB
+keymap  }   NEXT_TAB
+keymap  M-{ TAB_LEFT
+keymap  M-} TAB_RIGHT
+keymap  |   PIPE_BUF
+
+# edit buffer in VIM
+keymap  M-e EDIT_SCREEN
+# menu of links
+keymap  M-l LIST_MENU
+# jump to link in page
+keymap  M-m MOVE_LIST_MENU 
+keymap  M-n NEXT_MARK
+keymap  M-p PREV_MARK
+# reread all config options
+keymap  M-r REINIT 
+keymap  M-s SAVE
+keymap  <       PREV
+keymap  >       NEXT
+
+# Open specific pages in new tab
+keymap  M-1 COMMAND  "TAB_GOTO https://google.com; NEXT_LINK; GOTO_LINK"
+keymap  M-2 COMMAND  "TAB_GOTO https://duckduckgo.com/lite/; NEXT_LINK; GOTO_LINK"
+keymap  O   EXTERN
+keymap  o   EXTERN_LINK
