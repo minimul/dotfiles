@@ -1,12 +1,41 @@
-
 set nocompatible
 " Allow us to use Ctrl-s and Ctrl-q as keybinds
 " silent !stty -ixon
 
 " Restore default behaviour when leaving Vim.
 " autocmd VimLeave * silent !stty ixon
-
-execute pathogen#infect()
+call plug#begin('~/.vim/plugged')
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'junegunn/fzf', { 'do': './install --all' }
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/seoul256.vim' " Color scheme
+Plug 'Raimondi/delimitMate' " Adds auto pairing of ', [, etc.
+Plug 'mattn/emmet-vim'
+Plug 'mattn/gist-vim'
+Plug 'twitvim/twitvim'
+Plug 'therubymug/vim-pyte'
+Plug 'kchmck/vim-coffee-script'
+Plug 'will133/vim-dirdiff'
+Plug 'tpope/vim-fugitive' " Git blame integration
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-abolish' " Smart case-sensitive search and replace
+Plug 'tpope/vim-repeat'
+Plug 'pangloss/vim-javascript'
+Plug 'jelera/vim-javascript-syntax' " Support for ES6 keywords, operators, etc.
+Plug 'sickill/vim-pasta' " Make hashs, arrays, etc aligned nicely
+Plug 'christoomey/vim-run-interactive' " Run command within a full bash env
+" begin snipmate
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
+" end snipmate
+Plug 'Julian/vim-textobj-brace'
+Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'HerringtonDarkholme/w3m.vim'
+call plug#end()
 
 filetype plugin indent on
 
@@ -83,11 +112,11 @@ set fo +=n2
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 
 set noswapfile
-set nobackup		" do not keep a backup file, use versions instead
-set history=500		" keep 500 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
+set nobackup    " do not keep a backup file, use versions instead
+set history=500   " keep 500 lines of command line history
+set ruler   " show the cursor position all the time
+set showcmd   " display incomplete commands
+set incsearch   " do incremental searching
 set complete+=kspell
 set tabstop=2
 set shiftwidth=2
@@ -284,7 +313,9 @@ set noesckeys
 set ttimeout
 set ttimeoutlen=1
 
-colorscheme pyte
+" let g:seoul256_background = 256
+" colo seoul256-light
+colo pyte
 highlight Search guifg=Black guibg=Red gui=bold
 " Highlight the status line
 highlight StatusLine ctermfg=blue ctermbg=yellow
