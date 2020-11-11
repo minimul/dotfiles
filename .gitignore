@@ -13,6 +13,7 @@
 !.bashrc
 !.bash_profile
 .bash_history
+!.gitconfig
 !.gemrc
 !.inputrc
 !.irbrc
