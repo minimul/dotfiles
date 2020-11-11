@@ -21,14 +21,13 @@ map <leader>nl :set invnumber<CR>
 map <Leader>fc :call OpenFactoryFile()<CR>
 map <leader>em <C-y>, " Emmit.vim modes
 map <Leader>vi :tabe ~/.vimrc<CR>
-map <Leader>sp :set paste<CR>
 map <Leader>np :set nopaste<CR>
 map <Leader>vr :rightbelow vnew
-map <Leader>snru :rightbelow vnew ~/.vim/snippets/ruby.snippets<CR>
+map <Leader>snrb :rightbelow vnew ~/.vim/snippets/ruby.snippets<CR>
 map <Leader>snjs :rightbelow vnew ~/.vim/snippets/javascript.snippets<CR>
 map <Leader>snra :rightbelow vnew ~/.vim/rails.snippets<CR>
-map <Leader>snerb :rightbelow vnew ~/.vim/snippets/snippets/eruby.snippets<CR>
-map <Leader>snsh :rightbelow vnew ~/.vim/snippets/snippets/sh.snippets<CR>
+map <Leader>snerb :rightbelow vnew ~/.vim/snippets/eruby.snippets<CR>
+map <Leader>snsh :rightbelow vnew ~/.vim/snippets/sh.snippets<CR>
 map <Leader>wd :set textwidth=78<CR>
 map <Leader>ww ggVG<CR> " Visual block the whole page
 map <Leader>wv ggVGgq<CR> " Format entire page with textwidth=78
@@ -45,7 +44,15 @@ map <Leader>sl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts bin/rs
 map <Leader>rb :w<cr>:RunInInteractiveShell ts ruby %<CR>
 map <Leader>rt :w<cr>:call RunCurrentTest('RunInInteractiveShell ts be rspec')<CR>
 map <Leader>rs :w<cr>:RunInInteractiveShell ts be standardrb %<CR>
+map <Leader>sp :RunInInteractiveShell ts spp<CR>
+map <Leader>ra :RunInInteractiveShell ts be rake<CR>
 map <Leader>rsa :w<cr>:RunInInteractiveShell ts be standardrb<CR>
+map <Leader>rsaf :w<cr>:RunInInteractiveShell ts be standardrb --fix<CR>
+map <Leader>rsf :w<cr>:RunInInteractiveShell ts be standardrb --fix %<CR>
+map <Leader>rj :w<cr>:RunInInteractiveShell ts yarn standard %<CR>
+map <Leader>rja :w<cr>:RunInInteractiveShell ts yarn standard<CR>
+map <Leader>rjf :w<cr>:RunInInteractiveShell ts yarn standard --fix %<CR>
+map <Leader>rjaf :w<cr>:RunInInteractiveShell ts yarn standard --fix<CR>
 map <Leader>rl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts be rspec')<CR>
 map <Leader>rbp :w<cr>:execute '!rbprettier --write %'<CR>
 map <Leader>rn :call RenameFile()<cr>
@@ -174,7 +181,6 @@ endfunction
 
 function! RunCurrentTest(rspec_type)
   let in_test_file = match(expand("%"), '\(_spec.rb\|_test.rb\)$') != -1
-  :echo in_test_file
   if in_test_file
     call SetTestFile()
 

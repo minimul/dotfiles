@@ -1,3 +1,5 @@
+snippet #!
+	#!/usr/bin/env ruby
 snippet cla class .. end
 	class ${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`}
 		${0}
@@ -23,5 +25,9 @@ snippet mod module .. end
 # attr_reader
 snippet r
 	attr_reader :${0:attr_names}
+snippet defi
+	def initialize(${1:args})
+		${0}
+	end
 
 extends rails
