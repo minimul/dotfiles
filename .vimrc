@@ -24,6 +24,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'jelera/vim-javascript-syntax' " Support for ES6 keywords, operators, etc.
 Plug 'sickill/vim-pasta' " Make hashs, arrays, etc aligned nicely
 Plug 'christoomey/vim-run-interactive' " Run command within a full bash env
+Plug 'christoomey/vim-rfactory'
 " begin snipmate
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
@@ -47,14 +48,14 @@ map <leader>nd :NERDTree %<CR>
 map <leader>ns :setlocal nospell<CR>
 map <leader>ss :setlocal spell<CR>
 map <leader>nl :set invnumber<CR>
-map <Leader>fc :call OpenFactoryFile()<CR>
 map <leader>em <C-y>, " Emmit.vim modes
 map <Leader>vi :tabe ~/.vimrc<CR>
 map <Leader>np :set nopaste<CR>
 map <Leader>vr :rightbelow vnew
+map <Leader>vf :rightbelow vnew test/factories/
 map <Leader>snrb :rightbelow vnew ~/.vim/snippets/ruby.snippets<CR>
 map <Leader>snjs :rightbelow vnew ~/.vim/snippets/javascript.snippets<CR>
-map <Leader>snra :rightbelow vnew ~/.vim/rails.snippets<CR>
+map <Leader>snra :rightbelow vnew ~/.vim/snippets/rails.snippets<CR>
 map <Leader>snerb :rightbelow vnew ~/.vim/snippets/eruby.snippets<CR>
 map <Leader>snsh :rightbelow vnew ~/.vim/snippets/sh.snippets<CR>
 map <Leader>wd :set textwidth=78<CR>
@@ -82,6 +83,7 @@ map <Leader>rj :w<cr>:RunInInteractiveShell ts yarn standard %<CR>
 map <Leader>rja :w<cr>:RunInInteractiveShell ts yarn standard<CR>
 map <Leader>rjf :w<cr>:RunInInteractiveShell ts yarn standard --fix %<CR>
 map <Leader>rjaf :w<cr>:RunInInteractiveShell ts yarn standard --fix<CR>
+map <Leader>rst :w<cr>:RunInInteractiveShell rst<CR>
 map <Leader>rl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts be rspec')<CR>
 map <Leader>rbp :w<cr>:execute '!rbprettier --write %'<CR>
 map <Leader>rn :call RenameFile()<cr>
@@ -102,6 +104,7 @@ let twitvim_browser_fork = "w3m"
 
 set rtp+=/usr/local/opt/fzf
 set rtp+=~/.vim/snippets
+set rtp-=~/.vim/plugged/vim-snippets " remove from rtp - only use my snippets in ~/.vim/snippets
 
 set ssop-=options  " do not store global and local values in a session" 
 
