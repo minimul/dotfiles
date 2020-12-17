@@ -1,9 +1,5 @@
 set nocompatible
-" Allow us to use Ctrl-s and Ctrl-q as keybinds
-" silent !stty -ixon
 
-" Restore default behaviour when leaving Vim.
-" autocmd VimLeave * silent !stty ixon
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'junegunn/fzf', { 'do': './install --all' }
@@ -24,6 +20,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'jelera/vim-javascript-syntax' " Support for ES6 keywords, operators, etc.
 Plug 'sickill/vim-pasta' " Make hashs, arrays, etc aligned nicely
 Plug 'christoomey/vim-run-interactive' " Run command within a full bash env
+Plug 'christoomey/vim-system-copy'
 " begin snipmate
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
@@ -85,7 +82,7 @@ map <Leader>rjaf :w<cr>:RunInInteractiveShell ts yarn standard --fix<CR>
 map <Leader>rl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts be rspec')<CR>
 map <Leader>rbp :w<cr>:execute '!rbprettier --write %'<CR>
 map <Leader>rn :call RenameFile()<cr>
-" Paste from clipboard
+" Paste from clipboard. Only works on Mac
 map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<CR>:retab<CR>
 
 " Edit another file in the same directory as the current file
@@ -263,8 +260,21 @@ else
 end
 endfunction
 
+function! s:IsMacOS()
+  let os = substitute(system('uname'), '\n', '', '')
+  if has("gui_mac") || os ==? 'Darwin'
+    true
+  else
+    false
+  end
+endfunction
+
 function! CopyToOSClipboard()
-  exec(":silent !cat % | pbcopy")
+  if <SID>IsMacOS()
+    exec(":silent !cat % | pbcopy")
+  else
+    exec(":silent !cat % | xsel --clipboard --input")
+  end
   :redraw!
 endfunction
 

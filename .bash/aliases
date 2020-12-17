@@ -4,7 +4,6 @@ alias be='bundle exec'
 alias bu='bundle'
 alias br='bin/rails'
 alias brk='bin/rake'
-alias ctags="`brew --prefix`/bin/ctags"
 alias mig='bin/rake db:migrate'
 alias miga='bin/rails g migration'
 alias rced='bin/rails credentials:edit --environment development'
