@@ -8,6 +8,28 @@ snippet red
 	Rails.env.development?
 snippet ret
 	Rails.env.test?
+snippet concern
+	extend ActiveSupport::Concern
+	included do
+		scope :disabled, -> { where(disabled: true) }
+		before_action :set_customer, only: [:edit, :update, :destroy]
+	end
+
+	class_methods do
+		...
+	end
+snippet val
+	class ReportLikeValidator < ActiveModel::EachValidator
+		def validate_each(record, attribute, value)
+			unless value["Report"]
+				record.errors.add(attribute, "does not appear to be a Report")
+			end
+		end
+	end
+
+	# class Report < ActiveRecord::Base
+	# 	validates :name, report_like: true
+	# end
 snippet set
 	setup do
 		${0}
