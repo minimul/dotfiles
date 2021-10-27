@@ -48,3 +48,4 @@ if [[ $(uname) == "Linux" ]]; then
   alias pbcopy='xclip -selection clipboard'
   alias pbpaste='xclip -selection clipboard -o'
 fi
+alias pgwebalt='pgweb --port=5433 --listen=8082'
