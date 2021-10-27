@@ -6,3 +6,5 @@ fi
 source ~/.bash/functions
 source ~/.bashrc
 source ~/.bash/aliases
+
+. /usr/local/opt/asdf/libexec/asdf.sh
