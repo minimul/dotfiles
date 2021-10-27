@@ -1,6 +1,8 @@
 [user]
-  name = Christian
+	name = minimul
   email = zarski@gmail.com
+[core]
+  editor = vim
 [diff]
 [color]
   ui = auto
@@ -37,3 +39,8 @@
   user = minimul
 [heroku]
   account = personal
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
