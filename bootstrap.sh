@@ -8,7 +8,7 @@ ln -sf $dir/.inputrc ~
 ln -sf $dir/.irbrc ~
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-mkdir -p $dir/.w3m
+mkdir -p ~/.w3m
 ln -sf $dir/.w3m/keymap ~/.w3m/
 ln -sf $dir/.w3m/config ~/.w3m/
 ln -sf $dir/.w3m/bookmark.html ~/.w3m/
