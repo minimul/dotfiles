@@ -266,15 +266,11 @@ endfunction
 
 function! s:IsMacOS()
   let os = substitute(system('uname'), '\n', '', '')
-  if has("gui_mac") || os ==? 'Darwin'
-    true
-  else
-    false
-  end
+  return has("gui_mac") || os ==? 'Darwin'
 endfunction
 
 function! CopyToOSClipboard()
-  if <SID>IsMacOS()
+  if s:IsMacOS()
     exec(":silent !cat % | pbcopy")
   else
     exec(":silent !cat % | xsel --clipboard --input")
