@@ -85,7 +85,7 @@ map <Leader>rst :w<cr>:RunInInteractiveShell rst<CR>
 map <Leader>rl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts be rspec')<CR>
 map <Leader>rbp :w<cr>:execute '!rbprettier --write %'<CR>
 map <Leader>rn :call RenameFile()<cr>
-" Paste from clipboard. Only works on Mac
+" Paste from clipboard. Only works on Mac. On Linux use system-copy plugin
 map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<CR>:retab<CR>
 
 " Edit another file in the same directory as the current file
