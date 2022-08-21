@@ -49,6 +49,7 @@ if [[ $(uname) == "Linux" ]]; then
   alias pbcopy='xclip -selection clipboard'
   alias pbpaste='xclip -selection clipboard -o'
   alias padrestart='$HOME/oss/libinput-gestures/libinput-gestures-setup restart'
+  alias cqs='copyq show'
 fi
 alias pg94="$HOME/.asdf/installs/postgres/9.4.26/bin/pg_ctl -D $HOME/.asdf/installs/postgres/9.4.26/data -l logfile start"
 alias pg96="$HOME/.asdf/installs/postgres/9.6.23/bin/pg_ctl -D $HOME/.asdf/installs/postgres/9.6.23/data -l logfile start"
