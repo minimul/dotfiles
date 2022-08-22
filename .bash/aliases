@@ -4,7 +4,8 @@ alias be='bundle exec'
 alias bu='bundle'
 alias br='bin/rails'
 alias brk='bin/rake'
-alias mig='bin/rake db:migrate'
+alias mig='bin/rails db:migrate'
+alias migt='bin/rails db:migrate RAILS_ENV=test'
 alias miga='bin/rails g migration'
 alias rced='bin/rails credentials:edit --environment development'
 alias rcet='bin/rails credentials:edit --environment test'
@@ -54,5 +55,7 @@ fi
 alias pg94="$HOME/.asdf/installs/postgres/9.4.26/bin/pg_ctl -D $HOME/.asdf/installs/postgres/9.4.26/data -l logfile start"
 alias pg96="$HOME/.asdf/installs/postgres/9.6.23/bin/pg_ctl -D $HOME/.asdf/installs/postgres/9.6.23/data -l logfile start"
 alias pg12="$HOME/.asdf/installs/postgres/12.8/bin/pg_ctl -D $HOME/.asdf/installs/postgres/12.8/data -l logfile start"
+alias pg14="$HOME/.asdf/installs/postgres/14.5/bin/pg_ctl -D $HOME/.asdf/installs/postgres/14.5/data -l logfile start"
 alias pgwebreg='pgweb --db=postgres'
 alias pgwebalt='pgweb --port=5433 --listen=8082 --db=postgres'
+alias pgwebalt2='pgweb --port=5434 --listen=8083 --db=postgres'
