@@ -51,6 +51,7 @@ map <Leader>vi :tabe ~/.vimrc<CR>
 map <Leader>np :set nopaste<CR>
 map <Leader>vr :rightbelow vnew
 map <Leader>vf :rightbelow vnew test/factories/
+map <Leader>rf :rightbelow vnew spec/factories/
 map <Leader>snrb :rightbelow vnew ~/.vim/snippets/ruby.snippets<CR>
 map <Leader>snjs :rightbelow vnew ~/.vim/snippets/javascript.snippets<CR>
 map <Leader>snra :rightbelow vnew ~/.vim/snippets/rails.snippets<CR>

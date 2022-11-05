@@ -25,6 +25,8 @@ keymap  E   EDIT
 keymap  G   END
 keymap  J   UP
 keymap  K   DOWN
+keymap  H   PREV
+keymap  L   NEXT
 keymap  /   SEARCH
 keymap  N   SEARCH_PREV
 keymap  R   RELOAD
