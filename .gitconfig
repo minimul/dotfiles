@@ -1,8 +1,9 @@
 [user]
-	name = minimul
+  name = minimul
   email = christian@minimul.com
 [core]
   editor = vim
+  excludesfile = ~/.global_gitignore
 [diff]
 [color]
   ui = auto
@@ -40,7 +41,7 @@
 [heroku]
   account = personal
 [filter "lfs"]
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f

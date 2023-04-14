@@ -3,14 +3,13 @@ set nocompatible
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'junegunn/fzf', { 'do': './install --all' }
-Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align' " horizontal aligning
 Plug 'junegunn/seoul256.vim' " Color scheme
 Plug 'Raimondi/delimitMate' " Adds auto pairing of ', [, etc.
 Plug 'mattn/emmet-vim'
 Plug 'mattn/gist-vim'
 Plug 'twitvim/twitvim'
-Plug 'therubymug/vim-pyte'
-Plug 'kchmck/vim-coffee-script'
+Plug 'therubymug/vim-pyte' " Theme
 Plug 'will133/vim-dirdiff'
 Plug 'tpope/vim-fugitive' " Git blame integration
 Plug 'tpope/vim-surround'
@@ -18,7 +17,7 @@ Plug 'tpope/vim-abolish' " Smart case-sensitive search and replace
 Plug 'tpope/vim-repeat'
 Plug 'pangloss/vim-javascript'
 Plug 'jelera/vim-javascript-syntax' " Support for ES6 keywords, operators, etc.
-Plug 'sickill/vim-pasta' " Make hashs, arrays, etc aligned nicely
+Plug 'sickill/vim-pasta' " Make hashs, arrays, etc aligned nicely when pasting
 Plug 'christoomey/vim-run-interactive' " Run command within a full bash env
 Plug 'christoomey/vim-system-copy'
 Plug 'christoomey/vim-rfactory'
@@ -29,11 +28,12 @@ Plug 'garbas/vim-snipmate'
 let g:snipMate = { 'snippet_version' : 1 }
 Plug 'honza/vim-snippets'
 " end snipmate
-Plug 'Julian/vim-textobj-brace'
+Plug 'Julian/vim-textobj-brace' " edit inside of [] and {}
 Plug 'kana/vim-textobj-indent'
-Plug 'kana/vim-textobj-user'
-Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'kana/vim-textobj-user' " create custom text-objects
+Plug 'nelstrom/vim-textobj-rubyblock' " easily select ruby constructs
 Plug 'HerringtonDarkholme/w3m.vim'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
 call plug#end()
 
 filetype plugin indent on
