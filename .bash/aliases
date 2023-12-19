@@ -50,8 +50,8 @@ if [[ $(uname) == "Linux" ]]; then
   alias fd='fdfind'
 fi
 if [[ $(uname) == "Darwin" ]]; then
-  alias ctags="`brew --prefix`/bin/ctags"
-end
+  alias ctags="$(brew --prefix)/bin/ctags"
+fi
 alias pg94="$HOME/.asdf/installs/postgres/9.4.26/bin/pg_ctl -D $HOME/.asdf/installs/postgres/9.4.26/data -l logfile start"
 alias pg96="$HOME/.asdf/installs/postgres/9.6.23/bin/pg_ctl -D $HOME/.asdf/installs/postgres/9.6.23/data -l logfile start"
 alias pg12="$HOME/.asdf/installs/postgres/12.8/bin/pg_ctl -D $HOME/.asdf/installs/postgres/12.8/data -l logfile start"

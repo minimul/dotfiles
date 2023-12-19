@@ -305,6 +305,8 @@ endfunction
 """""""""""""""""""""""""""""""""
 
 autocmd BufRead,BufNewFile ~/www/minimul/data/*/* set syntax=html
+" Inspect the variable on the current line (in Ruby)
+autocmd FileType ruby nmap ,i ^"oy$Iputs "<esc>A: #{<esc>"opA"<esc>
 autocmd FileType text call SetTextFile() " For all text files set 'textwidth' to 78 characters.
 autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd BufReadPost *
