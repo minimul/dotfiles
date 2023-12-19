@@ -59,3 +59,4 @@ alias pg14="$HOME/.asdf/installs/postgres/14.5/bin/pg_ctl -D $HOME/.asdf/install
 alias pgwebreg='pgweb --db=postgres'
 alias pgwebalt='pgweb --port=5433 --listen=8082 --db=postgres'
 alias pgwebalt2='pgweb --port=5434 --listen=8083 --db=postgres'
+alias docker-compose='docker compose'
