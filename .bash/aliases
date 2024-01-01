@@ -39,7 +39,6 @@ alias vmailr='vmail'
 alias vimf='vim $(fzf)'
 alias rst='touch tmp/restart.txt'
 alias pwr='pkill -USR1 puma-dev'
-alias pumalog='grc tail -f -n 200 ~/Library/Logs/puma-dev.log'
 alias whatismyip='curl ipinfo.io/ip'
 alias vimpluginstall='curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 if [[ $(uname) == "Linux" ]]; then
@@ -51,6 +50,7 @@ if [[ $(uname) == "Linux" ]]; then
 fi
 if [[ $(uname) == "Darwin" ]]; then
   alias ctags="$(brew --prefix)/bin/ctags"
+  alias pumalog='grc tail -f -n 200 ~/Library/Logs/puma-dev.log'
 fi
 alias pg94="$HOME/.asdf/installs/postgres/9.4.26/bin/pg_ctl -D $HOME/.asdf/installs/postgres/9.4.26/data -l logfile start"
 alias pg96="$HOME/.asdf/installs/postgres/9.6.23/bin/pg_ctl -D $HOME/.asdf/installs/postgres/9.6.23/data -l logfile start"
@@ -60,3 +60,4 @@ alias pgwebreg='pgweb --db=postgres'
 alias pgwebalt='pgweb --port=5433 --listen=8082 --db=postgres'
 alias pgwebalt2='pgweb --port=5434 --listen=8083 --db=postgres'
 alias docker-compose='docker compose'
+alias dkc='docker compose'
