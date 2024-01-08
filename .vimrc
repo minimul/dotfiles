@@ -314,6 +314,7 @@ autocmd BufReadPost *
   \   exe "normal g`\"" |
   \ endif
 
+au! FileType haml set expandtab
 
 " Use Silver Searcher instead of grep
 set grepprg=ag

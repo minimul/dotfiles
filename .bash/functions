@@ -85,5 +85,8 @@ function dkrails {
   docker compose exec rails $@
 }
 
+function dk-ip {
+  docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $@
+}
 
 # WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE OR ~/.bash_profile BEFORE RUNNING
