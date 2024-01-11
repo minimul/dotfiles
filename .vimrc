@@ -60,7 +60,6 @@ map <Leader>snsh :rightbelow vnew ~/.vim/snippets/sh.snippets<CR>
 map <Leader>wd :set textwidth=78<CR>
 map <Leader>ww ggVG<CR> " Visual block the whole page
 map <Leader>wv ggVGgq<CR> " Format entire page with textwidth=78
-map <Leader>cp :w<cr>:call CopyToOSClipboard()<CR>
 map <Leader>rg :reg<CR>
 map <Leader>wq Vapgq<CR>
 map <Leader>gr :RunInInteractiveShell ts github-markdown-preview %<CR>
@@ -86,8 +85,6 @@ map <Leader>rst :w<cr>:RunInInteractiveShell rst<CR>
 map <Leader>rl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts be rspec')<CR>
 map <Leader>rbp :w<cr>:execute '!rbprettier --write %'<CR>
 map <Leader>rn :call RenameFile()<cr>
-" Paste from clipboard. Only works on Mac. On Linux use system-copy plugin
-map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<CR>:retab<CR>
 
 " Edit another file in the same directory as the current file
 " uses expression to extract path from current file's path
@@ -270,15 +267,6 @@ function! s:IsMacOS()
   return has("gui_mac") || os ==? 'Darwin'
 endfunction
 
-function! CopyToOSClipboard()
-  if s:IsMacOS()
-    exec(":silent !cat % | pbcopy")
-  else
-    exec(":silent !cat % | xsel --clipboard --input")
-  end
-  :redraw!
-endfunction
-
 fun! SetTextFile()
   let in_minimul_dir = match(expand("%"), 'www\/minimul\/data') != -1
   if in_minimul_dir
@@ -288,6 +276,12 @@ fun! SetTextFile()
     setlocal textwidth=78
   end
 endfun
+
+if s:IsMacOS()
+  " Paste from clipboard. Only works on Mac. On Linux use system-copy plugin
+  map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<CR>:retab<CR>
+  map <Leader>cp :w<cr>:exec(":silent !cat % | pbcopy")<CR>
+end
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE (thanks Gary Bernhardt)
@@ -313,8 +307,6 @@ autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
   \   exe "normal g`\"" |
   \ endif
-
-au! FileType haml set expandtab
 
 " Use Silver Searcher instead of grep
 set grepprg=ag

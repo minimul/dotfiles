@@ -28,7 +28,6 @@ alias gcaam='git ci --amend -am'
 alias gra='git rebase --abort'
 alias rr='bin/rails routes | less'
 alias lss='ls -alt *.sess'
-alias flushdns='sudo killall -HUP mDNSResponder'
 alias soa='source ~/.bash/aliases'
 alias voa='vim ~/.bash/aliases'
 alias coa='cat ~/.bash/aliases'
@@ -42,8 +41,13 @@ alias pwr='pkill -USR1 puma-dev'
 alias whatismyip='curl ipinfo.io/ip'
 alias vimpluginstall='curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 if [[ $(uname) == "Linux" ]]; then
-  alias pbcopy='xclip -selection clipboard'
-  alias pbpaste='xclip -selection clipboard -o'
+  if [[ $WAYLAND_DISPLAY =~ (wayland) ]]; then
+    alias pbcopy='wl-copy'
+    alias pbpaste='wl-paste'
+  else
+    alias pbcopy='xclip -selection clipboard'
+    alias pbpaste='xclip -selection clipboard -o'
+  fi
   alias padrestart='$HOME/oss/libinput-gestures/libinput-gestures-setup restart'
   alias cqs='copyq show'
   alias fd='fdfind'
