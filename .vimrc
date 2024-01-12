@@ -22,11 +22,11 @@ Plug 'christoomey/vim-run-interactive' " Run command within a full bash env
 Plug 'christoomey/vim-system-copy'
 Plug 'christoomey/vim-rfactory'
 " begin snipmate
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'garbas/vim-snipmate'
-let g:snipMate = { 'snippet_version' : 1 }
-Plug 'honza/vim-snippets'
+" Plug 'MarcWeber/vim-addon-mw-utils'
+" Plug 'tomtom/tlib_vim'
+" Plug 'garbas/vim-snipmate'
+" let g:snipMate = { 'snippet_version' : 1 }
+" Plug 'honza/vim-snippets'
 " end snipmate
 Plug 'Julian/vim-textobj-brace' " edit inside of [] and {}
 Plug 'kana/vim-textobj-indent'
