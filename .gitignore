@@ -21,6 +21,7 @@
 !.tmuxgo
 !.tmuxgo-rails
 !.vimrc
+!.psqlrc
 !bootstrap.sh
 !.bashrc-ubuntu
 !.bashrc-macos

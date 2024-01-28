@@ -6,6 +6,7 @@ ln -sf $dir/.bash_profile ~
 source $dir/.bash_profile
 ln -sf $dir/.vimrc ~
 ln -sf $dir/.inputrc ~
+ln -sf $dir/.psqlrc ~
 ln -sf $dir/.irbrc ~
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

@@ -280,7 +280,7 @@ endfun
 if s:IsMacOS()
   " Paste from clipboard. Only works on Mac. On Linux use system-copy plugin
   map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<CR>:retab<CR>
-  map <Leader>cp :w<cr>:exec(":silent !cat % | pbcopy")<CR>
+  " map <Leader>cp :w<CR>exec ':silent !cat % | pbcopy'<CR>
 end
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
