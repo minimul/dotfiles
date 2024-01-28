@@ -78,7 +78,7 @@ function reset-conn {
   db=$1
   port=$([ -z "$2" ] && echo 5432 || echo $2)
 
-echo "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = current_database() AND pid <> pg_backend_pid();" | psql --port $port -U minimul $db
+  echo "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = current_database() AND pid <> pg_backend_pid();" | psql --port $port -U minimul $db
 }
 
 function dkrails {
@@ -87,6 +87,12 @@ function dkrails {
 
 function dk-ip {
   docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $@
+}
+
+function pg-ctl {
+  [[ $1 ]] || return "You must supply a Postgres server version"
+  [[ $2 ]] || return "You must supply pg_ctl arguments"
+  $HOME/.asdf/installs/postgres/$1/bin/pg_ctl -D $HOME/.asdf/installs/postgres/$1/data $2
 }
 
 # WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE OR ~/.bash_profile BEFORE RUNNING
