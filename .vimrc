@@ -308,6 +308,12 @@ autocmd BufReadPost *
   \   exe "normal g`\"" |
   \ endif
 
+function SqlFormatter()
+  set noai
+  map <Leader>sf :%!sqlformat --reindent --keywords upper --identifiers lower -<CR>
+endfunction
+autocmd FileType sql call SqlFormatter()
+
 " Use Silver Searcher instead of grep
 set grepprg=ag
 "
