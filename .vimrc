@@ -63,8 +63,8 @@ map <Leader>wv ggVGgq<CR> " Format entire page with textwidth=78
 map <Leader>rg :reg<CR>
 map <Leader>wq Vapgq<CR>
 map <Leader>gr :RunInInteractiveShell ts github-markdown-preview %<CR>
-map <Leader>el :w<cr>:call RunCurrentLineInExpressTest()<CR>
-map <Leader>et :w<cr>:call RunCurrentExpressTest()<CR>
+map <Leader>el :w<cr>:call RunCurrentLineInContainerTest()<CR>
+map <Leader>et :w<cr>:call RunCurrentContainerTest()<CR>
 map <Leader>dt :w<cr>:call RunCurrentTest('RunInInteractiveShell ts spec/dummy/bin/rspec')<CR>
 map <Leader>dl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts spec/dummy/bin/rspec')<CR>
 map <Leader>st :w<cr>:call RunCurrentTest('RunInInteractiveShell ts bin/rspec')<CR>
@@ -198,13 +198,13 @@ function! Relpath(filename)
   return s
 endfunction
 
-function! RunCurrentExpressTest()
-  exec 'RunInInteractiveShell ts ./bin/run ' . Relpath(expand("%:p"))
+function! RunCurrentContainerTest()
+  exec 'RunInInteractiveShell ts dkrails rspec ' . Relpath(expand("%:p"))
 endfunction
 
-function! RunCurrentLineInExpressTest()
+function! RunCurrentLineInContainerTest()
   let ln = line(".")
-  exec 'RunInInteractiveShell ts ./bin/run ' . Relpath(expand("%:p")) . ':' . ln
+  exec 'RunInInteractiveShell ts dkrails rspec ' . Relpath(expand("%:p")) . ':' . ln
 endfunction
 
 function! RunCurrentTest(rspec_type)
