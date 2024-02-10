@@ -21,13 +21,9 @@ Plug 'sickill/vim-pasta' " Make hashs, arrays, etc aligned nicely when pasting
 Plug 'christoomey/vim-run-interactive' " Run command within a full bash env
 Plug 'christoomey/vim-system-copy'
 Plug 'christoomey/vim-rfactory'
-" begin snipmate
-" Plug 'MarcWeber/vim-addon-mw-utils'
-" Plug 'tomtom/tlib_vim'
-" Plug 'garbas/vim-snipmate'
-" let g:snipMate = { 'snippet_version' : 1 }
-" Plug 'honza/vim-snippets'
-" end snipmate
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'rafamadriz/friendly-snippets' " preconfigured snippets to work with vim-vsnip
 Plug 'Julian/vim-textobj-brace' " edit inside of [] and {}
 Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-user' " create custom text-objects
@@ -52,11 +48,6 @@ map <Leader>np :set nopaste<CR>
 map <Leader>vr :rightbelow vnew
 map <Leader>vf :rightbelow vnew test/factories/
 map <Leader>rf :rightbelow vnew spec/factories/
-map <Leader>snrb :rightbelow vnew ~/.vim/snippets/ruby.snippets<CR>
-map <Leader>snjs :rightbelow vnew ~/.vim/snippets/javascript.snippets<CR>
-map <Leader>snra :rightbelow vnew ~/.vim/snippets/rails.snippets<CR>
-map <Leader>snerb :rightbelow vnew ~/.vim/snippets/eruby.snippets<CR>
-map <Leader>snsh :rightbelow vnew ~/.vim/snippets/sh.snippets<CR>
 map <Leader>wd :set textwidth=78<CR>
 map <Leader>ww ggVG<CR> " Visual block the whole page
 map <Leader>wv ggVGgq<CR> " Format entire page with textwidth=78
@@ -99,8 +90,6 @@ let twitvim_browser_cmd = 'w3m'
 let twitvim_browser_fork = "w3m"
 
 set rtp+=/usr/local/opt/fzf
-set rtp+=~/.vim/snippets
-set rtp-=~/.vim/plugged/vim-snippets " remove from rtp - only use my snippets in ~/.vim/snippets
 
 set ssop-=options  " do not store global and local values in a session" 
 
@@ -188,6 +177,36 @@ endif
 
 vmap <leader><Bar> :EasyAlign*<Bar><Enter> " Align GitHub-flavored Markdown tables
 map Q gq
+
+"""""""""
+" vsnip setup
+""""""""
+" NOTE: You can use other key to expand snippet.
+
+" Expand
+imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+
+" Expand or jump
+imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+
+" Jump forward or backward
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+
+" Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+" See https://github.com/hrsh7th/vim-vsnip/pull/50
+nmap        s   <Plug>(vsnip-select-text)
+xmap        s   <Plug>(vsnip-select-text)
+nmap        S   <Plug>(vsnip-cut-text)
+xmap        S   <Plug>(vsnip-cut-text)
+
+" If you want to use snippet for multiple filetypes, you can `g:vsnip_filetypes` for it.
+let g:vsnip_filetypes = {}
+let g:vsnip_filetypes.ruby = ['rails']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Test-running stuff
