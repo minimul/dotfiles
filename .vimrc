@@ -54,10 +54,8 @@ map <Leader>wv ggVGgq<CR> " Format entire page with textwidth=78
 map <Leader>rg :reg<CR>
 map <Leader>wq Vapgq<CR>
 map <Leader>gr :RunInInteractiveShell ts github-markdown-preview %<CR>
-map <Leader>el :w<cr>:call RunCurrentLineInContainerTest()<CR>
-map <Leader>et :w<cr>:call RunCurrentContainerTest()<CR>
-map <Leader>dt :w<cr>:call RunCurrentTest('RunInInteractiveShell ts spec/dummy/bin/rspec')<CR>
-map <Leader>dl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts spec/dummy/bin/rspec')<CR>
+map <Leader>dt :w<cr>:call RunCurrentTest('RunInInteractiveShell ts dkrails rspec')<CR>
+map <Leader>dl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts dkrails rspec')<CR>
 map <Leader>st :w<cr>:call RunCurrentTest('RunInInteractiveShell ts bin/rspec')<CR>
 map <Leader>sl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts bin/rspec')<CR>
 map <Leader>rb :w<cr>:RunInInteractiveShell ts ruby %<CR>
@@ -181,28 +179,9 @@ map Q gq
 """""""""
 " vsnip setup
 """"""""
-" NOTE: You can use other key to expand snippet.
-
 " Expand
 imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
 smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
-
-" Expand or jump
-imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-
-" Jump forward or backward
-imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-
-" Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
-" See https://github.com/hrsh7th/vim-vsnip/pull/50
-nmap        s   <Plug>(vsnip-select-text)
-xmap        s   <Plug>(vsnip-select-text)
-nmap        S   <Plug>(vsnip-cut-text)
-xmap        S   <Plug>(vsnip-cut-text)
 
 " If you want to use snippet for multiple filetypes, you can `g:vsnip_filetypes` for it.
 let g:vsnip_filetypes = {}
@@ -215,15 +194,6 @@ function! Relpath(filename)
   let cwd = getcwd()
   let s = substitute(a:filename, l:cwd . "/" , "", "")
   return s
-endfunction
-
-function! RunCurrentContainerTest()
-  exec 'RunInInteractiveShell ts dkrails rspec ' . Relpath(expand("%:p"))
-endfunction
-
-function! RunCurrentLineInContainerTest()
-  let ln = line(".")
-  exec 'RunInInteractiveShell ts dkrails rspec ' . Relpath(expand("%:p")) . ':' . ln
 endfunction
 
 function! RunCurrentTest(rspec_type)
