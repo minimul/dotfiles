@@ -3,7 +3,7 @@
 web:*.{html,css,js}*
 
 --glob
-!*.min.js
+!*.min.{js,css}
 
 # Set the colors.
 --colors=line:none
