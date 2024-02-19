@@ -11,6 +11,8 @@
 -- SELECT * FROM<enter>. %R shows what type of input it expects.
 \set PROMPT2 '[more] %R > '
 
+\setenv PAGER 'less -S'
+
 -- Show how long each query takes to execute
 \timing
 
@@ -21,3 +23,7 @@
 \set HISTCONTROL ignoredups
 \set COMP_KEYWORD_CASE upper
 \unset quiet
+-- Nicely formatted tables.
+\pset linestyle unicode
+-- Don't store duplicates in history
+\set HISTCONTROL ignoredups
