@@ -52,6 +52,7 @@ map <Leader>wd :set textwidth=78<CR>
 map <Leader>ww ggVG<CR> " Visual block the whole page
 map <Leader>wv ggVGgq<CR> " Format entire page with textwidth=78
 map <Leader>rg :reg<CR>
+map <Leader>cl :%s /\\\"//g<cr>:%s /"//g<cr>:call SqlFormat()<CR>
 map <Leader>wq Vapgq<CR>
 map <Leader>gr :RunInInteractiveShell ts github-markdown-preview %<CR>
 map <Leader>dt :w<cr>:call RunCurrentTest('RunInInteractiveShell ts dkrails rspec')<CR>
@@ -297,9 +298,13 @@ autocmd BufReadPost *
   \   exe "normal g`\"" |
   \ endif
 
-function SqlFormatter()
+function SqlFormat()
   set noai
-  map <Leader>sf :%!sqlformat --reindent --keywords upper --identifiers lower -<CR>
+  exec ':%!sqlformat --reindent --keywords upper --identifiers lower -'
+endfunction
+
+function SqlFormatter()
+  map <Leader>sf :call SqlFormat()<CR>
 endfunction
 autocmd FileType sql call SqlFormatter()
 
