@@ -11,7 +11,8 @@
 -- SELECT * FROM<enter>. %R shows what type of input it expects.
 \set PROMPT2 '[more] %R > '
 
-\setenv PAGER 'less -S'
+-- \setenv PAGER 'less -S'
+\setenv PAGER 'pspg -X -b'
 
 -- Show how long each query takes to execute
 \timing
@@ -27,3 +28,5 @@
 \pset linestyle unicode
 -- Don't store duplicates in history
 \set HISTCONTROL ignoredups
+\echo 🧐 🐘 postgres_dba 6.0 installed. Use ":dba" to see menu
+\set dba '\\i /home/minimul/oss/postgres_dba/start.psql'
