@@ -26,6 +26,8 @@
 \unset quiet
 -- Nicely formatted tables.
 \pset linestyle unicode
+-- Border around tables
+\pset border 2
 -- Don't store duplicates in history
 \set HISTCONTROL ignoredups
 \echo 🧐 🐘 postgres_dba 6.0 installed. Use ":dba" to see menu
