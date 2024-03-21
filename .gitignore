@@ -23,6 +23,7 @@
 !.vimrc
 !.psqlrc
 !.ripgreprc
+!.vale.ini
 !bootstrap.sh
 !.bashrc-ubuntu
 !.bashrc-macos
