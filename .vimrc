@@ -236,11 +236,13 @@ function! RunCurrentLineInTest(rspec_type)
 endfunction
 
 function! SetTestFile()
-  let g:bjo_test_file=@%
+  # Leave off the base path for Docker usage
+  let g:bjo_test_file=@ . expand('%:.')
 endfunction
 
 function! SetTestFileWithLine()
-  let g:bjo_test_file=@%
+  # Leave off the base path for Docker usage
+  let g:bjo_test_file=@ . expand('%:.')
   let g:bjo_test_file_line=line(".")
 endfunction
 
