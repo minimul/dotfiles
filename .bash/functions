@@ -95,4 +95,8 @@ function pg-ctl {
   [[ $2 ]] || return "You must supply pg_ctl arguments"
   $HOME/.asdf/installs/postgres/$1/bin/pg_ctl -D $HOME/.asdf/installs/postgres/$1/data $2
 }
+
+function dkinputrc {
+  docker compose cp $HOME/oss/dotfiles/.inputrc rails:${1:-/home}
+}
 # WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE OR ~/.bash_profile BEFORE RUNNING
