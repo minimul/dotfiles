@@ -4,6 +4,7 @@
 [core]
   editor = vim
   excludesfile = ~/.global_gitignore
+  attributesfile = ~/.gitattributes
 [diff]
 [color]
   ui = auto
@@ -45,3 +46,6 @@
   process = git-lfs filter-process
   required = true
   clean = git-lfs clean -- %f
+# Additional manually-configured matchers you may want to add to your .gitconfig
+[diff "rspec"]
+  xfuncname = "^[ \t]*((RSpec|describe|context|it|before|after|around|feature|scenario|background)[ \t].*)$"

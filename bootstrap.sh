@@ -1,6 +1,7 @@
 dir=~/oss/dotfiles
 ln -sf $dir/.gitconfig ~
 ln -sf $dir/.global_gitignore ~
+ln -sf $dir/.gitattributes ~
 ln -sf $dir/.bash ~
 ln -sf $dir/.bash_profile ~
 source $dir/.bash_profile
