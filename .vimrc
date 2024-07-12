@@ -83,6 +83,8 @@ map <Leader>se :split <C-R>=expand("%:p:h") . '/'<CR>
 map <Leader>ve :vnew <C-R>=expand("%:p:h") . '/'<CR>
 
 nnoremap <leader>ri :RunInInteractiveShell<space>
+" Select just pasted text
+nnoremap gp `[v`]`
 
 " Twitvim
 let twitvim_browser_cmd = 'w3m'
