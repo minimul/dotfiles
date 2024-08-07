@@ -271,6 +271,12 @@ fun! SetTextFile()
   end
 endfun
 
+fun! TrimWhitespace()
+  let l:save = winsaveview()
+  keeppatterns %s/\s\+$//e
+  call winrestview(l:save)
+endfun
+
 if s:IsMacOS()
   " Paste from clipboard. Only works on Mac. On Linux use system-copy plugin
   map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<CR>:retab<CR>
