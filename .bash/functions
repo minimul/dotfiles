@@ -19,7 +19,7 @@ function gdd {
   arg2=$([ -z "$2" ] && echo $2 || echo "--diff-filter=A")
   cmd="git diff $arg2 HEAD~$arg1..HEAD"
   echo $cmd
-  eval $cmd 
+  eval $cmd
 }
 
 function gdl {
@@ -33,11 +33,11 @@ function gdl {
   then
     new=
   else
-    new=--diff-filter=A 
+    new=--diff-filter=A
   fi
   cmd="git diff --name-only $new HEAD~$back_commits..HEAD"
   echo $cmd
-  eval $cmd 
+  eval $cmd
 }
 
 function bs() {
@@ -59,7 +59,7 @@ function go-base {
   params="$(ruby -r cgi -e 'puts CGI.escape(ARGV[0])' "$args")"
   url=$(printf $url "$params")
   cmd="w3m \"$url\""
-  eval $cmd 
+  eval $cmd
 }
 
 function go-th {
@@ -98,5 +98,12 @@ function pg-ctl {
 
 function dkinputrc {
   docker compose cp $HOME/oss/dotfiles/.inputrc rails:${1:-/home}
+}
+
+function remindme {
+  # decimals supported in first/sleep arg
+  sleep ${1}m
+  shift 1
+  yad --text="$*"
 }
 # WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE OR ~/.bash_profile BEFORE RUNNING
