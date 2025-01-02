@@ -7,6 +7,7 @@ ln -sf $dir/.bash_profile ~
 source $dir/.bash_profile
 ln -sf $dir/.vimrc ~
 ln -sf $dir/.inputrc ~
+ln -sf $dir/.gemrc ~
 ln -sf $dir/.psqlrc ~
 ln -sf $dir/.ripgreprc ~
 ln -sf $dir/.vale.ini ~
