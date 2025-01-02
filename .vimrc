@@ -303,6 +303,7 @@ autocmd BufRead,BufNewFile ~/www/minimul/data/*/* set syntax=html
 autocmd FileType ruby nmap ,i ^"oy$Iputs "<esc>A: #{<esc>"opA"<esc>
 autocmd FileType text call SetTextFile() " For all text files set 'textwidth' to 78 characters.
 autocmd BufRead,BufNewFile *.md setlocal spell
+autocmd BufRead,BufNewFile *.thor set filetype=ruby
 autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
   \   exe "normal g`\"" |
