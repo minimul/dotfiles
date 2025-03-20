@@ -98,6 +98,7 @@ function pg-ctl {
 
 function dkinputrc {
   docker compose cp $HOME/oss/dotfiles/.inputrc rails:${1:-/home}
+  docker compose cp $HOME/oss/dotfiles/.irbrc rails:${1:-/home}
 }
 
 function remindme {
