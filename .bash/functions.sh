@@ -85,6 +85,12 @@ function dkrails {
   docker compose exec rails $@
 }
 
+function dkconsole {
+  dkinputrc
+  dkinputrc irbrc
+  docker compose exec rails rails console
+}
+
 function dk-ip {
   docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $@
 }
@@ -97,8 +103,7 @@ function pg-ctl {
 }
 
 function dkinputrc {
-  docker compose cp $HOME/oss/dotfiles/.inputrc rails:${1:-/home}
-  docker compose cp $HOME/oss/dotfiles/.irbrc rails:${1:-/home}
+  docker compose cp $HOME/oss/dotfiles/.${1:-inputrc} rails:${2:-/home}
 }
 
 function remindme {
