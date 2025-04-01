@@ -68,3 +68,5 @@ alias pgwebalt2='pgweb --port=5434 --listen=8083 --db=postgres'
 alias docker-compose='docker compose'
 alias dkc='docker compose'
 alias rscp="rsync -ah --progress"
+alias lastd='ls -t ~/Downloads/ | head -n 1'
+alias lastdp='lastd | pbcopy && echo "$(lastd) copied to clipboard."'

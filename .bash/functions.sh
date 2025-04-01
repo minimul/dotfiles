@@ -46,7 +46,7 @@ function bs() {
 
 function hcli {
   app=$1
-  cmd="heroku run \"bash -i -c 'echo set editing-mode vi > ~/.inputrc'; rails c\" --app=$app"
+  cmd="heroku run \"bash -i -c 'echo set editing-mode vi > ~/.inputrc'; rails c -- --noautocomplete\" --app=$app"
   echo $cmd
   eval $cmd
 }
