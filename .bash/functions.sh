@@ -44,6 +44,10 @@ function bs() {
   ag "$1" $(bundle show --paths)
 }
 
+function lastdl() {
+  ls -alt ~/Downloads | head -n ${1:-10}
+}
+
 function hcli {
   app=$1
   cmd="heroku run \"bash -i -c 'echo set editing-mode vi > ~/.inputrc'; rails c -- --noautocomplete\" --app=$app"
