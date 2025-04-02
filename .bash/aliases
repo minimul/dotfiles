@@ -70,3 +70,4 @@ alias dkc='docker compose'
 alias rscp="rsync -ah --progress"
 alias lastd='ls -t ~/Downloads/ | head -n 1'
 alias lastdp='lastd | pbcopy && echo "$(lastd) copied to clipboard."'
+alias pgkick='echo "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = current_database() AND pid <> pg_backend_pid();"'

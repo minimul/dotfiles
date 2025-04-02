@@ -78,13 +78,6 @@ function go-g {
   go-base "https://www.google.com/search?q=%s" $@
 }
 
-function reset-conn {
-  db=$1
-  port=$([ -z "$2" ] && echo 5432 || echo $2)
-
-  echo "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = current_database() AND pid <> pg_backend_pid();" | psql --port $port -U minimul $db
-}
-
 function dkrails {
   docker compose exec rails $@
 }
