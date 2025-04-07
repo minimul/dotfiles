@@ -1,0 +1,149 @@
+" execute pathogen#infect()
+set nocompatible
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+set noswapfile
+set history=500
+set nobackup
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+set winheight=999
+set wmh=0 " split don't have that xtra line
+syntax on
+set autoindent
+set incsearch
+set hlsearch
+set autoread
+set ignorecase
+set number
+set scrolloff=3
+set nofoldenable " Say no to code folding...
+let $BASH_ENV = "~/.bash_profile"
+let mapleader = ","
+map <leader>ns :setlocal nospell<CR>
+map <leader>ss :setlocal spell<CR>
+map <leader>nl :set invnumber<CR>
+map <Leader>vi :tabe ~/.vimrc<CR>
+map <Leader>vr :rightbelow vnew
+map <Leader>wd :setlocal textwidth=78<CR>
+map <Leader>rg :reg<CR>
+map <Leader>rn :call RenameFile()<cr>
+map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<cr> " paste from clipboard
+map <Leader>ee :e <C-R>=expand("%:p:h") . '/'<CR>
+map <Leader>se :split <C-R>=expand("%:p:h") . '/'<CR>
+map <Leader>ve :vnew <C-R>=expand("%:p:h") . '/'<CR>
+
+colorscheme murphy
+
+map <C-h> :nohl<cr>
+map <C-s> <esc>:w<CR>
+imap <C-s> <esc>:w<CR>
+" Make 'Y' consistent with 'C' & 'D'
+nnoremap Y y$
+
+map <leader>w <c-w>w " Switch/toggle between split windows
+map <leader>h <c-w>h<c-w><cr> " Go to left vertical split
+map <leader>l <c-w>l<c-w><cr>  " Go to right vertical split
+map <S-j> <C-W>j<C-W>_ " Go down horz split
+map <S-k> <C-W>k<C-W>_ " Go up horz split
+map <S-h> gT
+map <S-l> gt
+" ---- Toggle between the last two active tabs
+let g:lasttab = 1
+nmap <Leader>t :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+
+" Show tab number on the tabline
+if exists("+showtabline")
+     function! MyTabLine()
+         let s = ''
+         let t = tabpagenr()
+         let i = 1
+         while i <= tabpagenr('$')
+             let buflist = tabpagebuflist(i)
+             let winnr = tabpagewinnr(i)
+             let s .= '%' . i . 'T'
+             let s .= (i == t ? '%1*' : '%2*')
+             let s .= ' '
+             let s .= i . ')'
+             "let s .= winnr . '/' . tabpagewinnr(i,'$')
+             let s .= ' %*'
+             let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
+             let file = bufname(buflist[winnr - 1])
+             let file = fnamemodify(file, ':p:t')
+             if file == ''
+                 let file = '[No Name]'
+             endif
+             let s .= file
+             let i = i + 1
+         endwhile
+         let s .= '%T%#TabLineFill#%='
+         let s .= (tabpagenr('$') > 1 ? '%999XX' : 'X')
+         return s
+     endfunction
+     set stal=2
+     set tabline=%!MyTabLine()
+endif
+
+map Q gq
+
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " Enable file type detection.
+  " Use the default filetype settings, so that mail gets 'tw' set to 72,
+  " 'cindent' is on in C files, etc.
+  " Also load indent files, to automatically do language-dependent indenting.
+  filetype plugin indent on
+
+  " au FileType javascript call JavaScriptFold()
+
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
+    au!
+
+    " For all text files set 'textwidth' to 78 characters.
+    " autocmd FileType text setlocal textwidth=78
+    " Highlights the line you are doing input in
+    " autocmd InsertLeave * se nocul
+    " autocmd InsertEnter * se cul
+    autocmd BufRead,BufNewFile *.md setlocal spell
+    au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null " type gg=G to pretty print xml
+    " autocmd FileType javascript setlocal expandtab shiftwidth=4 softtabstop=4
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid or when inside an event handler
+    " (happens when dropping a file on gvim).
+    autocmd BufReadPost *
+          \ if line("'\"") > 0 && line("'\"") <= line("$") |
+          \   exe "normal g`\"" |
+          \ endif
+
+  augroup END
+
+else
+
+endif " has("autocmd")
+
+" " Get rid of the delay when hitting esc!
+set noesckeys
+
+" (Hopefully) removes the delay when hitting esc in insert mode
+set noesckeys
+set ttimeout
+set ttimeoutlen=1
+
+highlight Search ctermbg=darkgreen ctermfg=white cterm=NONE
+highlight StatusLine ctermbg=Gray ctermfg=DarkRed cterm=NONE
+highlight StatusLineNC ctermbg=Gray ctermfg=DarkBlue cterm=NONE

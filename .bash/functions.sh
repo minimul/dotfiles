@@ -82,10 +82,33 @@ function dkrails {
   docker compose exec rails $@
 }
 
+function dkconsoler {
+  dkinputrc inputrc /home/rails
+  dkinputrc irbrc /home/rails
+  docker compose exec rails rails console
+}
+
 function dkconsole {
   dkinputrc
   dkinputrc irbrc
   docker compose exec rails rails console
+}
+
+function dkinputrc {
+  docker compose cp $HOME/oss/dotfiles/.${1:-inputrc} rails:${2:-/home}
+}
+
+function dotcp {
+  [[ $1 ]] || return "You must supply the local file to be copied"
+  docker compose cp $HOME/oss/dotfiles/$1 ${2:-rails}:${3:-/home}
+}
+
+function dkvimrc {
+  service=${1:-rails}
+  destdir=${2:-/home/rails}
+  docker compose exec $service bash -c "echo 'export EDITOR=vim' >> $destdir/.bashrc"
+  docker compose exec $service bash -c "echo 'set -o vi' >> $destdir/.bashrc"
+  dotcp vimrc-slim $service $destdir/.vimrc
 }
 
 function dk-ip {
@@ -97,10 +120,6 @@ function pg-ctl {
   [[ $1 ]] || return "You must supply a Postgres server version"
   [[ $2 ]] || return "You must supply pg_ctl arguments"
   $HOME/.asdf/installs/postgres/$1/bin/pg_ctl -D $HOME/.asdf/installs/postgres/$1/data $2
-}
-
-function dkinputrc {
-  docker compose cp $HOME/oss/dotfiles/.${1:-inputrc} rails:${2:-/home}
 }
 
 function remindme {
