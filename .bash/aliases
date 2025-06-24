@@ -79,3 +79,6 @@ alias dksidekiq="docker compose exec -it rails bundle exec sidekiq -e developmen
 alias dkrake="dkrails rake"
 alias dkroutes="dkrails rails routes | fzf"
 alias dkbundle="dkrails bundle"
+alias dkrunner="dkrails rails runner"
+alias dkexec="dkc exec"
+alias dkcreds="dkexec -e EDITOR=vim rails rails credentials:edit -e"
