@@ -1,6 +1,4 @@
-" execute pathogen#infect()
 set nocompatible
-" allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 set noswapfile
 set history=500
@@ -99,47 +97,6 @@ function! RenameFile()
     endif
 endfunction
 
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
-
-  " au FileType javascript call JavaScriptFold()
-
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-    au!
-
-    " For all text files set 'textwidth' to 78 characters.
-    " autocmd FileType text setlocal textwidth=78
-    " Highlights the line you are doing input in
-    " autocmd InsertLeave * se nocul
-    " autocmd InsertEnter * se cul
-    autocmd BufRead,BufNewFile *.md setlocal spell
-    au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null " type gg=G to pretty print xml
-    " autocmd FileType javascript setlocal expandtab shiftwidth=4 softtabstop=4
-    " When editing a file, always jump to the last known cursor position.
-    " Don't do it when the position is invalid or when inside an event handler
-    " (happens when dropping a file on gvim).
-    autocmd BufReadPost *
-          \ if line("'\"") > 0 && line("'\"") <= line("$") |
-          \   exe "normal g`\"" |
-          \ endif
-
-  augroup END
-
-else
-
-endif " has("autocmd")
-
-" " Get rid of the delay when hitting esc!
-set noesckeys
-
-" (Hopefully) removes the delay when hitting esc in insert mode
 set noesckeys
 set ttimeout
 set ttimeoutlen=1
@@ -147,3 +104,4 @@ set ttimeoutlen=1
 highlight Search ctermbg=darkgreen ctermfg=white cterm=NONE
 highlight StatusLine ctermbg=Gray ctermfg=DarkRed cterm=NONE
 highlight StatusLineNC ctermbg=Gray ctermfg=DarkBlue cterm=NONE
+
