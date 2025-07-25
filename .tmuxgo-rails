@@ -3,29 +3,46 @@ SESSION=`basename $PWD`
 
 tmux -2 new-session -d -s $SESSION
 
+# ----
 tmux rename-window -t $SESSION:1 vim
 tmux split-window   -h
 tmux select-pane  -t 0
 tmux resize-pane  -R 40
+# ----
+tmux new-window    -t $SESSION -a -n docker
+tmux split-window   -h
+tmux select-pane -t 1
+tmux split-window   -v
+tmux select-pane -t 0
+tmux send-keys     'dkc up' 'C-m'
+# ----
+tmux new-window    -t $SESSION -a -n psql-local
+tmux split-window   -h
+tmux select-pane -t 1
+tmux send-keys     'bin/psql-local' 'C-m'
+tmux select-pane -t 0
+tmux send-keys     'bin/psql-local' 'C-m'
+# ----
 tmux new-window    -t $SESSION -a -n console
 tmux split-window   -h
 tmux select-pane -t 0
-tmux new-window    -t $SESSION -a -n "routes"
-tmux split-window   -v
-tmux select-pane -t 0
-tmux send-keys     'bundle exec rake routes | less' 'C-m'
-tmux new-window    -t $SESSION -a -n git
+# ----
+tmux new-window    -t $SESSION -a -n 'w3m & pgweb'
 tmux split-window   -h
+tmux select-pane -t 1
+tmux send-keys     'bin/pgweb' 'C-m'
 tmux select-pane -t 0
-tmux new-window    -t $SESSION -a -n general-purpose
-tmux split-window   -h
-tmux select-pane -t 0
+tmux send-keys     'go-g' 'C-m'
+# ----
 tmux new-window    -t $SESSION -a -n logs
 tmux split-window   -v
-tmux new-window    -t $SESSION -a -n elinks 'elinks -no-connect'
-tmux split-window   -h
+# ----
+tmux new-window    -t $SESSION -a -n routes
+tmux split-window   -v
 tmux select-pane -t 0
-tmux new-window    -t $SESSION -a -n ssh
+tmux send-keys     'dkroutes | fzf' 'C-m'
+# ----
+tmux new-window    -t $SESSION -a -n open
 tmux split-window   -h
 tmux select-pane -t 0
 
