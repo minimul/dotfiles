@@ -55,6 +55,18 @@ function hcli {
   eval $cmd
 }
 
+function bldup-psql {
+  heroku pg:psql -a bldup-${1:-7}
+}
+
+function bldup-console {
+  hcli bldup-${1:-7}
+}
+
+function bldup-console-no-tty {
+  heroku run rails console -a bldup-${1:-7} --no-tty
+}
+
 function go-base {
   url=$1
   echo $url
@@ -129,6 +141,10 @@ function remindme {
   yad --text="$*"
 }
 
+function generatehex {
+  ruby -rsecurerandom -e "puts SecureRandom.hex(${1:-12})"
+}
+
 function time-tables {
   # ig20180122 - displays meeting options in other time zones
   # ml20220712 - Linux GNU date compatible
@@ -158,21 +174,29 @@ function time-tables {
   date -d $mdate "$hfmt" # GNU linux compliant
   here=`TZ=$myplace date -d $mdate +%z` # Same Here
   here=$((`printf "%g" $here` / 100))
-  printf "$format1" "Eastern USA" 
-  printf "$format2" `seq $myday` 
+  printf "$format1" "Eastern USA"
+  printf "$format2" `seq $myday`
   printf "\n"
   for i in `seq 1 "${#place[*]}"`
   do
-      there=`TZ=${place[$i]} date -d "$mdate" +%z` # same here
-      there=$((`printf "%g" $there` / 100))
-      city[$i]=${place[$i]/*\//}
-      tdiff[$i]=$(($there - $here))
-      printf "$format1" ${city[$i]}
-      for j in `seq $myday`
-      do
-          printf "$format2" $(($j+${tdiff[$i]}))
-      done
-      printf "(%+d)\n" ${tdiff[$i]}
+    there=`TZ=${place[$i]} date -d "$mdate" +%z` # same here
+    there=$((`printf "%g" $there` / 100))
+    city[$i]=${place[$i]/*\//}
+    tdiff[$i]=$(($there - $here))
+    printf "$format1" ${city[$i]}
+    for j in `seq $myday`
+    do
+        printf "$format2" $(($j+${tdiff[$i]}))
+    done
+    printf "(%+d)\n" ${tdiff[$i]}
+  done
+}
+
+function stop-watch {
+  start=$(date +%s)
+  while true; do
+    time="$(($(date +%s) - $start))"
+    printf '%s\r' "$(date -u -d "@$time" +%H:%M:%S)"
   done
 }
 # WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE OR ~/.bash_profile BEFORE RUNNING
