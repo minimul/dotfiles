@@ -13,6 +13,7 @@ alias rcep='bin/rails credentials:edit --environment production'
 alias taildev='tail -f -n 200 log/development.log'
 alias tailtest='tail -f -n 200 log/test.log'
 alias gmp='ts github-markdown-preview' # used in vim e.g. :RunInInteractiveShell gmp ~/%
+alias dnsflush='sudo resolvectl flush-caches'
 alias bem='be rake db:migrate'
 alias bet='be rake db:test:prepare'
 alias gs='git st'
