@@ -39,9 +39,7 @@ tmux new-window    -t $SESSION -a -n logs
 tmux split-window   -v
 # ----
 tmux new-window    -t $SESSION -a -n routes
-tmux split-window   -v
-tmux select-pane -t 0
-# tmux send-keys     'dkroutes | fzf' 'C-m'
+tmux send-keys     'dkroutes' 'C-m'
 # ----
 tmux new-window    -t $SESSION -a -n open
 tmux split-window   -h
