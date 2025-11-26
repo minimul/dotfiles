@@ -28,12 +28,12 @@ tmux new-window    -t $SESSION -a -n console
 tmux split-window   -h
 tmux select-pane -t 0
 # ----
-tmux new-window    -t $SESSION -a -n 'w3m & pgweb'
+tmux new-window    -t $SESSION -a -n 'elinks & pgweb'
 tmux split-window   -h
 tmux select-pane -t 1
 tmux send-keys     'bin/pgweb' 'C-m'
 tmux select-pane -t 0
-tmux send-keys     'go-d' 'C-m'
+tmux send-keys     'elinks' 'C-m'
 # ----
 tmux new-window    -t $SESSION -a -n logs
 tmux split-window   -v
