@@ -1,0 +1,11 @@
+# type(subsystem): short description
+### Types
+# feat: A new feature
+# fix: A bug fix
+# docs: Documentation only changes
+# build: Changes that affect the build system or external dependencies
+# ci: Changes to our CI configuration files and scripts
+# perf: A code change that improves performance
+# refactor: A code change that neither fixes a bug nor adds a feature
+# style: Changes that do not affect the meaning of the code
+# test: Adding missing tests or correcting existing tests
