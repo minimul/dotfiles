@@ -36,12 +36,16 @@ tmux select-pane -t 0
 tmux send-keys     'elinks' 'C-m'
 # ----
 tmux new-window    -t $SESSION -a -n logs
-tmux split-window   -v
+tmux split-window   -h
 # ----
 tmux new-window    -t $SESSION -a -n routes
 tmux send-keys     'dkroutes' 'C-m'
 # ----
 tmux new-window    -t $SESSION -a -n open
+tmux split-window   -h
+tmux select-pane -t 0
+# ----
+tmux new-window    -t $SESSION -a -n kamal
 tmux split-window   -h
 tmux select-pane -t 0
 
