@@ -94,16 +94,10 @@ function dkrails {
   docker compose exec rails $@
 }
 
-function dkconsoler {
+function dkconsole {
   dkinputrc inputrc /home/rails
   dkinputrc irbrc /home/rails
-  docker compose exec rails rails console
-}
-
-function dkconsole {
-  dkinputrc
-  dkinputrc irbrc
-  docker compose exec rails rails console
+  docker compose exec -e RAILS_ENV=${1:-development} rails rails console
 }
 
 function dkinputrc {
