@@ -1,53 +1,65 @@
 #!/bin/bash
 SESSION=`basename $PWD`
+# Load in the functions and animations
+source $HOME/oss/bash_loading_animations/bash_loading_animations.sh
+# Run BLA::stop_loading_animation if the script is interrupted
+trap BLA::stop_loading_animation SIGINT
 
 tmux -2 new-session -d -s $SESSION
-
 # ----
 tmux rename-window -t $SESSION:1 vim
-tmux split-window   -h
-tmux select-pane  -t 0
-tmux resize-pane  -R 40
+tmux split-window -h
+tmux select-pane -t 0
+tmux resize-pane -R 40
 # ----
-tmux new-window    -t $SESSION -a -n docker
-tmux split-window   -h
+tmux new-window -t $SESSION -a -n 'docker & open'
+tmux split-window -h
 tmux select-pane -t 1
-tmux split-window   -v
-tmux select-pane -t 0
-tmux send-keys     'dkc up' 'C-m'
-sleep 10
-# ----
-tmux new-window    -t $SESSION -a -n psql-local
-tmux split-window   -h
-tmux select-pane -t 1
-tmux send-keys     'bin/psql-local' 'C-m'
-tmux select-pane -t 0
-tmux send-keys     'bin/psql-local' 'C-m'
-# ----
-tmux new-window    -t $SESSION -a -n console
-tmux split-window   -h
-tmux select-pane -t 0
-# ----
-tmux new-window    -t $SESSION -a -n 'elinks & pgweb'
-tmux split-window   -h
-tmux select-pane -t 1
-tmux send-keys     'bin/pgweb' 'C-m'
-tmux select-pane -t 0
-tmux send-keys     'elinks' 'C-m'
-# ----
-tmux new-window    -t $SESSION -a -n logs
-tmux split-window   -h
-# ----
-tmux new-window    -t $SESSION -a -n routes
-tmux send-keys     'dkroutes' 'C-m'
-# ----
-tmux new-window    -t $SESSION -a -n open
-tmux split-window   -h
-tmux select-pane -t 0
-# ----
-tmux new-window    -t $SESSION -a -n kamal
-tmux split-window   -h
+tmux split-window -v
 tmux select-pane -t 0
 
+tmux send-keys 'dkc up' 'C-m'
+BLA::start_loading_animation "${BLA_filling_bar[@]}"
+sleep 10
+BLA::stop_loading_animation
+
+# ----
+tmux new-window -t $SESSION -a -n psql-local
+tmux split-window -h
+tmux select-pane -t 1
+tmux send-keys 'bin/psql-local' 'C-m'
+tmux select-pane -t 0
+tmux send-keys 'bin/psql-local' 'C-m'
+# ----
+tmux new-window -t $SESSION -a -n 'console & prod console'
+tmux split-window -h
+tmux select-pane -t 0
+# ----
+tmux new-window -t $SESSION -a -n 'chawan & pgweb'
+tmux split-window -h
+tmux select-pane -t 1
+tmux send-keys 'bin/pgweb' 'C-m'
+tmux split-window -v
+tmux select-pane -t 2
+tmux resize-pane -U 20
+tmux send-keys 'cha -V' 'C-m'
+tmux select-pane -t 0
+tmux send-keys 'cha -V' 'C-m'
+# ----
+tmux new-window -t $SESSION -a -n 'logs & open'
+tmux split-window -h
+# ----
+tmux new-window -t $SESSION -a -n 'routes & open'
+tmux split-window -h
+tmux select-pane -t 0
+tmux send-keys 'dkroutes' 'C-m'
+# ----
+tmux new-window -t $SESSION -a -n open
+tmux split-window -h
+tmux select-pane -t 0
+# ----
+tmux new-window -t $SESSION -a -n kamal
+tmux split-window -h
+tmux select-pane -t 0
 tmux select-window -t $SESSION:1
 tmux -2 attach -t $SESSION
