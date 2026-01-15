@@ -1,5 +1,7 @@
 #!/bin/bash
 SESSION=`basename $PWD`
+
+# cd ~/oss & git clone https://github.com/Silejonu/bash_loading_animations
 # Load in the functions and animations
 source $HOME/oss/bash_loading_animations/bash_loading_animations.sh
 # Run BLA::stop_loading_animation if the script is interrupted
