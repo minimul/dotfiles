@@ -106,8 +106,10 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 . ~/.bash/aliases
 . ~/.bash/functions.sh
 
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+if [ -f $HOME/.asdf/asdf.sh ]; then
+  . $HOME/.asdf/asdf.sh
+  . $HOME/.asdf/completions/asdf.bash
+fi
 
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
@@ -122,3 +124,5 @@ if ! shopt -oq posix; then
   fi
 fi
 
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
