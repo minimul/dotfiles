@@ -126,3 +126,7 @@ fi
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# opencode
+export PATH=/home/minimul/.opencode/bin:$PATH
+. "$HOME/.cargo/env"

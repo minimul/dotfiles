@@ -22,6 +22,7 @@ alias gd='git di'
 alias gb='git br'
 alias gr='git reflog'
 alias gl='git log'
+alias gll='TZ="America/New_York" git log --format="%h %ad %s" --date=format-local:"%Y-%m-%d %I:%M %p EST"'
 alias gba='git br -a'
 alias goodjob='GOOD_JOB_POLL_INTERVAL=-1 bundle exec good_job start'
 alias gcam='git ci -am'
@@ -81,9 +82,13 @@ alias dkrake="dkrails rake"
 alias dkroutes="dkrails rails routes | fzf"
 alias dkbundle="dkrails bundle"
 alias dkrunner="dkrails rails runner"
+alias dkspec="dkrails rspec"
 alias dkexec="dkc exec"
 alias dkcreds="dkexec -e EDITOR=vim rails rails credentials:edit -e"
 alias elinks="docker run -it --rm linuxdojo/elinks-spidermonkey elinks"
 alias dkbundleopen="dkvimrc;dkexec -e EDITOR=vim rails bundle open"
 alias dkgoodjob="docker compose exec -it rails bundle exec good_job start"
 alias tmux-rails="~/oss/dotfiles/.tmuxgo-rails"
+alias t3.chat="cd ~/apps/t3router && cargo run --example multi_message"
+alias bldup-claude="~/bldup-claude -- --dangerously-skip-permissions"
+alias opencode-jail="~/oss/opencode-jail/opencode-jail"
