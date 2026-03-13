@@ -20,20 +20,18 @@
   dc = diff --cached
   po = push origin
   pom = push origin master
-  pop = push origin production
-  pod = push origin development
-  pup = pull origin production
   pum = pull origin master
-  pus = pull origin staging
-  pud = pull origin development
   puum = pull upstream master
   fup = fetch upstream
   com = checkout master
-  cop = checkout production
-  cos = checkout staging
-  cod = checkout development
   pr = "!f() { git fetch -fu ${2:-upstream} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
   pr-clean = "!git checkout master ; git for-each-ref refs/heads/pr/* --format=\"%(refname)\" | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+  # `git log` with patches shown with difftastic.
+  dl = -c diff.external=difft log -p --ext-diff
+  # Show the most recent commit with difftastic.
+  ds = -c diff.external=difft show --ext-diff
+  # `git diff` with difftastic.
+  dft = -c diff.external=difft diff
 [merge]
   tool = vimdiff
 [github]

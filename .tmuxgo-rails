@@ -37,24 +37,24 @@ tmux new-window -t $SESSION -a -n 'console & prod console'
 tmux split-window -h
 tmux select-pane -t 0
 # ----
-tmux new-window -t $SESSION -a -n 'chawan & pgweb'
+tmux new-window -t $SESSION -a -n 'chawan & t3.chat & pgweb'
 tmux split-window -h
 tmux select-pane -t 1
 tmux send-keys 'bin/pgweb' 'C-m'
 tmux split-window -v
 tmux select-pane -t 2
 tmux resize-pane -U 20
-tmux send-keys 'cha -V' 'C-m'
+tmux send-keys 't3.chat test' 'C-m'
 tmux select-pane -t 0
 tmux send-keys 'cha -V' 'C-m'
 # ----
 tmux new-window -t $SESSION -a -n 'logs & open'
 tmux split-window -h
 # ----
-tmux new-window -t $SESSION -a -n 'routes & open'
+tmux new-window -t $SESSION -a -n 'claude & claude'
 tmux split-window -h
 tmux select-pane -t 0
-tmux send-keys 'dkroutes' 'C-m'
+tmux send-keys 'bldup-claude' 'C-m'
 # ----
 tmux new-window -t $SESSION -a -n open
 tmux split-window -h

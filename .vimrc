@@ -331,8 +331,8 @@ set ttimeout
 set ttimeoutlen=1
 
 " let g:seoul256_background = 256
-" colo seoul256-light
-colo pyte
+colo seoul256
+" colo pyte
 highlight Search guifg=Black guibg=Red gui=bold
 " Highlight the status line
 highlight StatusLine ctermfg=blue ctermbg=yellow
