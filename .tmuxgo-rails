@@ -14,7 +14,7 @@ tmux split-window -h
 tmux select-pane -t 0
 tmux resize-pane -R 40
 # ----
-tmux new-window -t $SESSION -a -n 'docker & open'
+tmux new-window -t $SESSION -a -n docker
 tmux split-window -h
 tmux select-pane -t 1
 tmux split-window -v
@@ -34,7 +34,7 @@ tmux send-keys 'bin/psql-local' 'C-m'
 tmux select-pane -t 0
 tmux send-keys 'bin/psql-local' 'C-m'
 # ----
-tmux new-window -t $SESSION -a -n 'console'
+tmux new-window -t $SESSION -a -n console
 tmux split-window -h
 tmux select-pane -t 0
 # ----
