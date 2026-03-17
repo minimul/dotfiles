@@ -22,6 +22,7 @@ tmux select-pane -t 0
 
 tmux send-keys 'dkc up' 'C-m'
 BLA::start_loading_animation "${BLA_filling_bar[@]}"
+echo "Don't switch to another terminal tab until start up is done."
 sleep 10
 BLA::stop_loading_animation
 
@@ -33,11 +34,11 @@ tmux send-keys 'bin/psql-local' 'C-m'
 tmux select-pane -t 0
 tmux send-keys 'bin/psql-local' 'C-m'
 # ----
-tmux new-window -t $SESSION -a -n 'console & prod console'
+tmux new-window -t $SESSION -a -n 'console'
 tmux split-window -h
 tmux select-pane -t 0
 # ----
-tmux new-window -t $SESSION -a -n 'chawan & t3.chat & pgweb'
+tmux new-window -t $SESSION -a -n 'chawan & t3.chat'
 tmux split-window -h
 tmux select-pane -t 1
 tmux send-keys 'bin/pgweb' 'C-m'
@@ -48,13 +49,13 @@ tmux send-keys 't3.chat test' 'C-m'
 tmux select-pane -t 0
 tmux send-keys 'cha -V' 'C-m'
 # ----
-tmux new-window -t $SESSION -a -n 'logs & open'
+tmux new-window -t $SESSION -a -n open
 tmux split-window -h
 # ----
-tmux new-window -t $SESSION -a -n 'claude & claude'
+tmux new-window -t $SESSION -a -n AI
 tmux split-window -h
 tmux select-pane -t 0
-tmux send-keys 'bldup-claude' 'C-m'
+# tmux send-keys 'bldup-claude' 'C-m'
 # ----
 tmux new-window -t $SESSION -a -n open
 tmux split-window -h
@@ -63,5 +64,6 @@ tmux select-pane -t 0
 tmux new-window -t $SESSION -a -n kamal
 tmux split-window -h
 tmux select-pane -t 0
+# ----
 tmux select-window -t $SESSION:1
 tmux -2 attach -t $SESSION
