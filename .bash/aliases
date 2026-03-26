@@ -1,4 +1,3 @@
-
 shopt -s expand_aliases # needed for integrating inside of vim
 alias be='bundle exec'
 alias bu='bundle'
@@ -12,10 +11,7 @@ alias rcet='bin/rails credentials:edit --environment test'
 alias rcep='bin/rails credentials:edit --environment production'
 alias taildev='tail -f -n 200 log/development.log'
 alias tailtest='tail -f -n 200 log/test.log'
-alias gmp='ts github-markdown-preview' # used in vim e.g. :RunInInteractiveShell gmp ~/%
 alias dnsflush='sudo resolvectl flush-caches'
-alias bem='be rake db:migrate'
-alias bet='be rake db:test:prepare'
 alias gs='git st'
 alias ga='git add'
 alias gd='git di'
@@ -28,7 +24,6 @@ alias goodjob='GOOD_JOB_POLL_INTERVAL=-1 bundle exec good_job start'
 alias gcam='git ci -am'
 alias gcaam='git ci --amend -am'
 alias gra='git rebase --abort'
-alias rr='bin/rails routes | less'
 alias lss='ls -alt *.sess'
 alias soa='source ~/.bash/aliases'
 alias voa='vim ~/.bash/aliases'
@@ -54,26 +49,16 @@ if [[ $(uname) == "Linux" ]]; then
   fi
   alias padrestart='$HOME/oss/libinput-gestures/libinput-gestures-setup restart'
   alias cqs='copyq show'
-  alias fd='fdfind'
 fi
-if [[ $(uname) == "Darwin" ]]; then
-  alias ctags="$(brew --prefix)/bin/ctags"
-  alias pumalog='grc tail -f -n 200 ~/Library/Logs/puma-dev.log'
-fi
-alias pg94="$HOME/.asdf/installs/postgres/9.4.26/bin/pg_ctl -D $HOME/.asdf/installs/postgres/9.4.26/data -l logfile start"
-alias pg96="$HOME/.asdf/installs/postgres/9.6.23/bin/pg_ctl -D $HOME/.asdf/installs/postgres/9.6.23/data -l logfile start"
-alias pg12="$HOME/.asdf/installs/postgres/12.8/bin/pg_ctl -D $HOME/.asdf/installs/postgres/12.8/data -l logfile start"
-alias pg14="$HOME/.asdf/installs/postgres/14.5/bin/pg_ctl -D $HOME/.asdf/installs/postgres/14.5/data -l logfile start"
-alias pgwebreg='pgweb --db=postgres'
-alias pgwebalt='pgweb --port=5433 --listen=8082 --db=postgres'
-alias pgwebalt2='pgweb --port=5434 --listen=8083 --db=postgres'
-alias docker-compose='docker compose'
-alias dkc='docker compose'
+alias fd='fdfind'
 alias rscp="rsync -ah --progress"
 alias lastd='ls -t ~/Downloads/ | head -n 1'
 alias lastdp='lastd | pbcopy && echo "$(lastd) copied to clipboard."'
 alias pgkick='echo "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = current_database() AND pid <> pg_backend_pid();"'
-alias dkredis="dkc exec redis redis-cli"
+alias dkc='docker compose'
+alias dkexec="dkc exec"
+alias dkredis="dkexec redis redis-cli"
+alias dkrails="dkexec rails"
 alias dkcache="dkrails rails dev:cache"
 alias dkmig="dkrails rails db:migrate"
 alias dkmiga="dkrails rails g migration"
@@ -83,12 +68,14 @@ alias dkroutes="dkrails rails routes | fzf"
 alias dkbundle="dkrails bundle"
 alias dkrunner="dkrails rails runner"
 alias dkspec="dkrails rspec"
-alias dkexec="dkc exec"
 alias dkcreds="dkexec -e EDITOR=vim rails rails credentials:edit -e"
 alias elinks="docker run -it --rm linuxdojo/elinks-spidermonkey elinks"
 alias dkbundleopen="dkvimrc;dkexec -e EDITOR=vim rails bundle open"
-alias dkgoodjob="docker compose exec -it rails bundle exec good_job start"
+alias dkgoodjob="dkexec -it rails bundle exec good_job start"
 alias tmux-rails="~/oss/dotfiles/.tmuxgo-rails"
-alias t3.chat="cd ~/apps/t3router && cargo run --example multi_message"
 alias bldup-claude="~/bldup-claude -- --dangerously-skip-permissions"
 alias opencode-jail="~/oss/opencode-jail/opencode-jail"
+alias aia-jail="~/oss/aia-jail/aia-jail"
+alias aia-chat="aia-jail -- --chat --tokens --cost"
+alias aia-chat-premium="aia-chat -m anthropic/claude-sonnet-4.5,openai/gpt-5.3-codex"
+alias pi-jail="~/oss/pi-jail/pi-jail"

@@ -90,10 +90,6 @@ function go-g {
   go-base "https://www.google.com/search?q=%s" $@
 }
 
-function dkrails {
-  docker compose exec rails $@
-}
-
 function dkconsole {
   dkinputrc inputrc /home/rails
   dkinputrc irbrc /home/rails
@@ -119,6 +115,13 @@ function dkvimrc {
 
 function dk-ip {
   docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $@
+}
+
+function dk-db-ip {
+  current_dir=${PWD##*/}
+  current_dir=${current_dir:-/}
+  container_name=$current_dir-db-1
+  dk-ip $container_name
 }
 
 function pg-ctl {
@@ -192,5 +195,9 @@ function stop-watch {
     time="$(($(date +%s) - $start))"
     printf '%s\r' "$(date -u -d "@$time" +%H:%M:%S)"
   done
+}
+
+function readable {
+  curl $1 | w3m -T text/html $2
 }
 # WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE OR ~/.bash_profile BEFORE RUNNING
