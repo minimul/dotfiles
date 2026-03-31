@@ -45,7 +45,7 @@ tmux select-pane -t 1
 # tmux split-window -v
 # tmux select-pane -t 2
 # tmux resize-pane -U 20
-tmux send-keys 'ai-chat-prem' 'C-m'
+tmux send-keys 'aia-chat-prem' 'C-m'
 tmux select-pane -t 0
 tmux send-keys 'cha -V' 'C-m'
 # ----
