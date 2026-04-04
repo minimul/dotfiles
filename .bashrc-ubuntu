@@ -129,4 +129,3 @@ fi
 
 # opencode
 export PATH=/home/minimul/.opencode/bin:$PATH
-. "$HOME/.cargo/env"

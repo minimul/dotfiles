@@ -9,4 +9,3 @@ export EDITOR=vim
 source ~/.bash/functions.sh
 source ~/.bashrc
 source ~/.bash/aliases
-. "$HOME/.cargo/env"
