@@ -24,6 +24,7 @@ alias goodjob='GOOD_JOB_POLL_INTERVAL=-1 bundle exec good_job start'
 alias gcam='git ci -am'
 alias gcaam='git ci --amend -am'
 alias gra='git rebase --abort'
+alias gprc='gh pr create --fill'
 alias lss='ls -alt *.sess'
 alias soa='source ~/.bash/aliases'
 alias voa='vim ~/.bash/aliases'
@@ -68,6 +69,7 @@ alias dkroutes="dkrails rails routes | fzf"
 alias dkbundle="dkrails bundle"
 alias dkrunner="dkrails rails runner"
 alias dkspec="dkrails rspec"
+alias dkparallel-init="dkrails rake parallel:create parallel:load_schema"
 alias dkparallel="dkrails rake parallel:spec"
 alias dkcreds="dkexec -e EDITOR=vim rails rails credentials:edit -e"
 alias elinks="docker run -it --rm linuxdojo/elinks-spidermonkey elinks"
@@ -80,3 +82,4 @@ alias aia-jail="~/oss/aia-jail/aia-jail"
 alias aia-chat="aia-jail -- --chat --tokens --cost"
 alias aia-chat-premium="aia-chat -m anthropic/claude-sonnet-4.5,openai/gpt-5.3-codex"
 alias pi-jail="~/oss/pi-jail/pi-jail"
+alias claude-jail="~/oss/claude-jail/claude-jail"

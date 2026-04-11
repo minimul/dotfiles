@@ -30,6 +30,7 @@ Plug 'kana/vim-textobj-user' " create custom text-objects
 Plug 'nelstrom/vim-textobj-rubyblock' " easily select ruby constructs
 Plug 'HerringtonDarkholme/w3m.vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
+Plug 'djoshea/vim-autoread'
 call plug#end()
 
 filetype plugin indent on
