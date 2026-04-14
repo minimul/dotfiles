@@ -6,6 +6,4 @@ fi
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 export EDITOR=vim
 
-source ~/.bash/functions.sh
 source ~/.bashrc
-source ~/.bash/aliases
