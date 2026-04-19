@@ -121,3 +121,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+[ -f ~/.config/mise/config.toml ] && eval "$(mise activate bash)"
