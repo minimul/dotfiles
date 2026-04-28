@@ -48,48 +48,6 @@ function lastdl() {
   ls -alt ~/Downloads | head -n ${1:-10}
 }
 
-function hcli {
-  app=$1
-  cmd="heroku run \"bash -i -c 'echo set editing-mode vi > ~/.inputrc'; rails c -- --noautocomplete\" --app=$app"
-  echo $cmd
-  eval $cmd
-}
-
-function bldup-psql {
-  heroku pg:psql -a bldup-${1:-7}
-}
-
-function bldup-console {
-  hcli bldup-${1:-7}
-}
-
-function bldup-console-no-tty {
-  heroku run rails console -a bldup-${1:-7} --no-tty
-}
-
-function go-base {
-  url=$1
-  echo $url
-  shift
-  args=$@
-  params="$(ruby -r cgi -e 'puts CGI.escape(ARGV[0])' "$args")"
-  url=$(printf $url "$params")
-  cmd="w3m \"$url\""
-  eval $cmd
-}
-
-function go-th {
-  go-base "https://words.bighugelabs.com/%s" $@
-}
-
-function go-d {
-  go-base "https://www.duckduckgo.com/search?btnI&q=%s" $@
-}
-
-function go-g {
-  go-base "https://www.google.com/search?q=%s" $@
-}
-
 function dkconsole {
   dkinputrc inputrc /home/rails
   dkinputrc irbrc /home/rails
@@ -122,13 +80,6 @@ function dk-db-ip {
   current_dir=${current_dir:-/}
   container_name=$current_dir-db-1
   dk-ip $container_name
-}
-
-function pg-ctl {
-  # example: pg-ctl 16.1 '-l log/postgres.log start'
-  [[ $1 ]] || return "You must supply a Postgres server version"
-  [[ $2 ]] || return "You must supply pg_ctl arguments"
-  $HOME/.asdf/installs/postgres/$1/bin/pg_ctl -D $HOME/.asdf/installs/postgres/$1/data $2
 }
 
 function remindme {
@@ -195,9 +146,5 @@ function stop-watch {
     time="$(($(date +%s) - $start))"
     printf '%s\r' "$(date -u -d "@$time" +%H:%M:%S)"
   done
-}
-
-function readable {
-  curl $1 | w3m -T text/html $2
 }
 # WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE OR ~/.bash_profile BEFORE RUNNING
