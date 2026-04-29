@@ -122,6 +122,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+if [ -f ~/.fzf.bash ] && command -v fzf &>/dev/null && fzf --bash &>/dev/null; then
+  source ~/.fzf.bash
+fi
 
 [ -f ~/.config/mise/config.toml ] && eval "$(mise activate bash)"
