@@ -104,7 +104,7 @@ alias l='ls -CF'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 . ~/.bash/aliases
-. ~/.bash/functions.sh
+# . ~/.bash/functions.sh # is loaded now in ~/.bash/aliases so that it is available in vim
 
 if [ -f $HOME/.asdf/asdf.sh ]; then
   . $HOME/.asdf/asdf.sh

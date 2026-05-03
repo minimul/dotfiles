@@ -18,7 +18,6 @@ Plug 'tpope/vim-repeat'
 Plug 'pangloss/vim-javascript'
 Plug 'jelera/vim-javascript-syntax' " Support for ES6 keywords, operators, etc.
 Plug 'sickill/vim-pasta' " Make hashs, arrays, etc aligned nicely when pasting
-Plug 'christoomey/vim-run-interactive' " Run command within a full bash env
 Plug 'christoomey/vim-system-copy'
 Plug 'christoomey/vim-rfactory'
 Plug 'hrsh7th/vim-vsnip'
@@ -55,25 +54,15 @@ map <Leader>wv ggVGgq<CR> " Format entire page with textwidth=78
 map <Leader>rg :reg<CR>
 map <Leader>cl :%s /\\\"//g<cr>:%s /"//g<cr>:call SqlFormat()<CR>
 map <Leader>wq Vapgq<CR>
-map <Leader>gr :RunInInteractiveShell ts github-markdown-preview %<CR>
-map <Leader>dt :w<cr>:call RunCurrentTest('RunInInteractiveShell ts dkrails rspec')<CR>
-map <Leader>dl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts dkrails rspec')<CR>
-map <Leader>st :w<cr>:call RunCurrentTest('RunInInteractiveShell ts bin/rspec')<CR>
-map <Leader>sl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts bin/rspec')<CR>
-map <Leader>rb :w<cr>:RunInInteractiveShell ts ruby %<CR>
-map <Leader>rt :w<cr>:call RunCurrentTest('RunInInteractiveShell ts be rspec')<CR>
-map <Leader>rs :w<cr>:RunInInteractiveShell ts be standardrb %<CR>
-map <Leader>sp :RunInInteractiveShell ts spp<CR>
-map <Leader>ra :RunInInteractiveShell ts be rake<CR>
-map <Leader>rsa :w<cr>:RunInInteractiveShell ts be standardrb<CR>
-map <Leader>rsaf :w<cr>:RunInInteractiveShell ts be standardrb --fix<CR>
-map <Leader>rsf :w<cr>:RunInInteractiveShell ts be standardrb --fix %<CR>
-map <Leader>rj :w<cr>:RunInInteractiveShell ts yarn standard %<CR>
-map <Leader>rja :w<cr>:RunInInteractiveShell ts yarn standard<CR>
-map <Leader>rjf :w<cr>:RunInInteractiveShell ts yarn standard --fix %<CR>
-map <Leader>rjaf :w<cr>:RunInInteractiveShell ts yarn standard --fix<CR>
-map <Leader>rst :w<cr>:RunInInteractiveShell rst<CR>
-map <Leader>rl :w<cr>:call RunCurrentLineInTest('RunInInteractiveShell ts be rspec')<CR>
+map <Leader>dt :w<cr>:call RunCurrentTest('ts dkrails rspec')<CR>
+map <Leader>dl :w<cr>:call RunCurrentLineInTest('ts dkrails rspec')<CR>
+map <Leader>st :w<cr>:call RunCurrentTest('ts bin/rspec')<CR>
+map <Leader>sl :w<cr>:call RunCurrentLineInTest('ts bin/rspec')<CR>
+map <Leader>rb :w<cr>:ts ruby %<CR>
+map <Leader>rt :w<cr>:call RunCurrentTest('dkspec')<CR>
+map <Leader>ra :ts be rake<CR>
+map <Leader>rst :w<cr>:rst<CR>
+map <Leader>rl :w<cr>:call RunCurrentLineInTest('dkspec')<CR>
 map <Leader>rbp :w<cr>:execute '!rbprettier --write %'<CR>
 map <Leader>rn :call RenameFile()<cr>
 
@@ -83,13 +72,12 @@ map <Leader>ee :e <C-R>=expand("%:p:h") . '/'<CR>
 map <Leader>se :split <C-R>=expand("%:p:h") . '/'<CR>
 map <Leader>ve :vnew <C-R>=expand("%:p:h") . '/'<CR>
 
-nnoremap <leader>ri :RunInInteractiveShell<space>
 " Select just pasted text
 nnoremap gp `[v`]`
 
-" Twitvim
-let twitvim_browser_cmd = 'w3m'
-let twitvim_browser_fork = "w3m"
+" allow aliases when shelling out
+set shell=bash
+let $BASH_ENV = "~/.bash/aliases"
 
 set rtp+=/usr/local/opt/fzf
 
@@ -206,17 +194,17 @@ function! RunCurrentTest(rspec_type)
     call SetTestFile()
 
     if match(expand('%'), '_test\.rb$') != -1
-      call SetTestRunner("RunInInteractiveShell ts bin/rails test")
-      exec g:bjo_test_runner g:bjo_test_file
+      call SetTestRunner("ts bin/rails test")
+      exec '!' . g:bjo_test_runner . ' ' . g:bjo_test_file
     elseif match(expand('%'), '_spec\.rb$') != -1
       call SetTestRunner(a:rspec_type)
-      exec g:bjo_test_runner g:bjo_test_file
+      exec '!' . g:bjo_test_runner . ' ' . g:bjo_test_file
     else
       call SetTestRunner(a:rspec_type)
-      exec g:bjo_test_runner g:bjo_test_file
+      exec '!' . g:bjo_test_runner . ' ' . g:bjo_test_file
     endif
   else
-    exec g:bjo_test_runner g:bjo_test_file
+    exec '!' . g:bjo_test_runner . ' ' . g:bjo_test_file
   endif
 endfunction
 
@@ -229,22 +217,22 @@ function! RunCurrentLineInTest(rspec_type)
   if in_test_file
     call SetTestFileWithLine()
     if match(expand('%'), '_test\.rb$') != -1
-      call SetTestRunner("RunInInteractiveShell ts bin/rails test")
+      call SetTestRunner("ts bin/rails test")
     else
       call SetTestRunner(a:rspec_type)
     endif
   end
 
-  exec g:bjo_test_runner g:bjo_test_file . ":" . g:bjo_test_file_line
+  exec '!' . g:bjo_test_runner . ' ' . g:bjo_test_file . ':' . g:bjo_test_file_line
 endfunction
 
 function! SetTestFile()
-  # Leave off the base path for Docker usage
+  " Leave off the base path for Docker usage
   let g:bjo_test_file=@ . expand('%:.')
 endfunction
 
 function! SetTestFileWithLine()
-  # Leave off the base path for Docker usage
+  " Leave off the base path for Docker usage
   let g:bjo_test_file=@ . expand('%:.')
   let g:bjo_test_file_line=line(".")
 endfunction

@@ -1,4 +1,8 @@
+# Skip when sourced via BASH_ENV from vim's :! piped shells (e.g. fzf) so aliases don't shadow binaries.
+[[ -t 0 ]] || return
 shopt -s expand_aliases # needed for integrating inside of vim
+source ~/.bash/functions.sh
+
 alias be='bundle exec'
 alias bu='bundle'
 alias br='bin/rails'
@@ -81,6 +85,7 @@ alias opencode-jail="~/oss/opencode-jail/opencode-jail"
 alias aia-jail="~/oss/aia-jail/aia-jail"
 alias aia-chat="aia-jail -- --chat --tokens --cost"
 alias aia-chat-premium="aia-chat -m anthropic/claude-sonnet-4.5,openai/gpt-5.3-codex"
+alias aia-chat-platinum="aia-chat -m anthropic/claude-opus-4.5,openai/gpt-5.4"
 alias pi-jail="~/oss/pi-jail/pi-jail"
 alias claude-jail="~/oss/claude-jail/claude-jail"
 alias rpg="~/oss/rpg-docker-jail/rpg-docker-jail"
