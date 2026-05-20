@@ -147,4 +147,13 @@ function stop-watch {
     printf '%s\r' "$(date -u -d "@$time" +%H:%M:%S)"
   done
 }
+
+touchp() {
+  mkdir -p "$(dirname "$1")" && touch "$1"
+}
+
+touchpv() {
+  touchp "$1" && nvim "$1"
+}
+
 # WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE OR ~/.bash_profile BEFORE RUNNING

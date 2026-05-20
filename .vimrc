@@ -308,16 +308,15 @@ function SqlFormatter()
 endfunction
 autocmd FileType sql call SqlFormatter()
 
-" Use Silver Searcher instead of grep
-set grepprg=ag
-"
-" " Get rid of the delay when hitting esc!
-set noesckeys
+" Use ripgrep instead of grep
+set grepprg=rg
 
-" (Hopefully) removes the delay when hitting esc in insert mode
-set noesckeys
-set ttimeout
-set ttimeoutlen=1
+if !has('nvim')
+ " vim only: Get rid of the delay when hitting esc!
+ set noesckeys
+ set ttimeout
+ set ttimeoutlen=1
+endif
 
 " let g:seoul256_background = 256
 colo seoul256
