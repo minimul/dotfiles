@@ -20,6 +20,7 @@ ln -sf $dir/.w3m/keymap ~/.w3m/
 ln -sf $dir/.w3m/config ~/.w3m/
 ln -sf $dir/.w3m/bookmark.html ~/.w3m/
 ln -sf $dir/.tmux.conf ~
+ln -sf $dir/init.lua ~/.config/nvim/
 if [[ $(uname) ==  "Darwin" ]]; then
   ln -sf $dir/.bashrc-macos ~/.bashrc
 else

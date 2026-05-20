@@ -20,6 +20,7 @@
 !.tmux.conf
 !.tmuxgo
 !.tmuxgo-rails
+!init.lua
 !.vimrc
 !.psqlrc
 !.ripgreprc

@@ -40,6 +40,7 @@ alias mvim='/Applications/MacVim.app/Contents/bin/mvim'
 alias vmailm='VMAIL_HOME=~/.vmail/minimul vmail'
 alias vmailr='vmail'
 alias vimf='vim $(fzf)'
+alias nvimf='nvim $(fzf)'
 alias rst='touch tmp/restart.txt'
 alias pwr='pkill -USR1 puma-dev'
 alias whatismyip='curl ipinfo.io/ip'
@@ -89,3 +90,4 @@ alias aia-chat-platinum="aia-chat -m anthropic/claude-opus-4.5,openai/gpt-5.4"
 alias pi-jail="~/oss/pi-jail/pi-jail"
 alias claude-jail="~/oss/claude-jail/claude-jail"
 alias rpg="~/oss/rpg-docker-jail/rpg-docker-jail"
+alias encrypt="gpg -c"

@@ -156,4 +156,7 @@ touchpv() {
   touchp "$1" && nvim "$1"
 }
 
+decrypt() {
+   gpg -d -o "${1%.*}" "$1" && echo "Decrypted to: ${1%.*}"
+}
 # WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE OR ~/.bash_profile BEFORE RUNNING
