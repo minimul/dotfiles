@@ -32,6 +32,8 @@
   ds = -c diff.external=difft show --ext-diff
   # `git diff` with difftastic.
   dft = -c diff.external=difft diff
+  # It allows you to go to a branch and write `git squash main` to have the current state of your branch in a fresh commit on top of `main` without dealing with merge rebase conflicts.
+  squash = "!f() { git merge --no-edit origin/\"$1\" && git reset --soft origin/\"$1\" && git commit -m \"${2:-$(git log --reverse --format=%B origin/\"$1\"..ORIG_HEAD)}\"; }; f"
 [merge]
   tool = vimdiff
 [github]
