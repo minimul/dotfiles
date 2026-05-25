@@ -18,7 +18,6 @@ Plug 'tpope/vim-repeat'
 Plug 'pangloss/vim-javascript'
 Plug 'jelera/vim-javascript-syntax' " Support for ES6 keywords, operators, etc.
 Plug 'sickill/vim-pasta' " Make hashs, arrays, etc aligned nicely when pasting
-Plug 'christoomey/vim-system-copy'
 Plug 'christoomey/vim-rfactory'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
@@ -27,7 +26,6 @@ Plug 'Julian/vim-textobj-brace' " edit inside of [] and {}
 Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-user' " create custom text-objects
 Plug 'nelstrom/vim-textobj-rubyblock' " easily select ruby constructs
-Plug 'HerringtonDarkholme/w3m.vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
 Plug 'djoshea/vim-autoread'
 call plug#end()
@@ -111,8 +109,7 @@ set number
 set scrolljump=5
 set scrolloff=3
 set nofoldenable " Say no to code folding...
-" let $BASH_ENV = "~/.bash_profile"
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 
 map <C-h> :nohl<cr>
 map <C-s> <esc>:w<CR>
@@ -265,12 +262,6 @@ fun! TrimWhitespace()
   keeppatterns %s/\s\+$//e
   call winrestview(l:save)
 endfun
-
-if s:IsMacOS()
-  " Paste from clipboard. Only works on Mac. On Linux use system-copy plugin
-  map <Leader>pp :set paste<CR>o<esc>"*]p:set nopaste<CR>:retab<CR>
-  " map <Leader>cp :w<CR>exec ':silent !cat % | pbcopy'<CR>
-end
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE (thanks Gary Bernhardt)
