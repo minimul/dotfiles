@@ -4,6 +4,6 @@ if [[ -f ~/.profile ]]; then
   source ~/.profile
 fi
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
-export EDITOR=vim
+export EDITOR=nvim
 
 source ~/.bashrc

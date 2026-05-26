@@ -1,6 +1,6 @@
-# Skip when sourced via BASH_ENV from vim's :! piped shells (e.g. fzf) so aliases don't shadow binaries.
+# Skip when sourced via BASH_ENV from vim/nvim's :! piped shells (e.g. fzf) so aliases don't shadow binaries.
 [[ -t 0 ]] || return
-shopt -s expand_aliases # needed for integrating inside of vim
+shopt -s expand_aliases # needed for integrating inside of vim/nvim
 source ~/.bash/functions.sh
 
 alias be='bundle exec'
@@ -31,12 +31,11 @@ alias gra='git rebase --abort'
 alias gprc='gh pr create --fill'
 alias lss='ls -alt *.sess'
 alias soa='source ~/.bash/aliases'
-alias voa='vim ~/.bash/aliases'
+alias voa='nvim ~/.bash/aliases'
 alias coa='cat ~/.bash/aliases'
 alias cof='cat ~/.bash/functions.sh'
-alias vof='vim ~/.bash/functions.sh'
+alias vof='nvim ~/.bash/functions.sh'
 alias sof='source ~/.bash/functions.sh'
-alias mvim='/Applications/MacVim.app/Contents/bin/mvim'
 alias vmailm='VMAIL_HOME=~/.vmail/minimul vmail'
 alias vmailr='vmail'
 alias vimf='vim $(fzf)'
@@ -44,7 +43,6 @@ alias nvimf='nvim $(fzf)'
 alias rst='touch tmp/restart.txt'
 alias pwr='pkill -USR1 puma-dev'
 alias whatismyip='curl ipinfo.io/ip'
-alias vimpluginstall='curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 if [[ $(uname) == "Linux" ]]; then
   if [[ $WAYLAND_DISPLAY =~ (wayland) ]]; then
     alias pbcopy='wl-copy'
@@ -91,3 +89,4 @@ alias pi-jail="~/oss/pi-jail/pi-jail"
 alias claude-jail="~/oss/claude-jail/claude-jail"
 alias rpg="~/oss/rpg-docker-jail/rpg-docker-jail"
 alias encrypt="gpg -c"
+alias vim="nvim"
