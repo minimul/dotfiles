@@ -2,7 +2,7 @@
   name = minimul
   email = christian@minimul.com
 [core]
-  editor = vim
+  editor = nvim
   excludesfile = ~/.global_gitignore
   attributesfile = ~/.gitattributes
 [diff]
