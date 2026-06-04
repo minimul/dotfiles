@@ -28,6 +28,23 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- auto-refresh if file was changed and unmodified
+-- Fast update time (500ms instead of 4000ms)
+vim.opt.updatetime = 500
+vim.opt.autoread = true
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+  pattern = "*",
+  command = "if mode() != 'c' | checktime | endif",
+})
+-- Notify when file changes
+vim.api.nvim_create_autocmd("FileChangedShellPost", {
+  pattern = "*",
+  callback = function()
+    vim.notify("File reloaded: " .. vim.fn.expand("%"), vim.log.levels.INFO)
+  end,
+})
+-- end auto-refresh
+
 -- 3. Configure your plugins
 -- This is where you list the plugins you want to install.
 require("lazy").setup({

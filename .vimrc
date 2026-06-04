@@ -27,7 +27,6 @@ Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-user' " create custom text-objects
 Plug 'nelstrom/vim-textobj-rubyblock' " easily select ruby constructs
 Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
-Plug 'djoshea/vim-autoread'
 call plug#end()
 
 filetype plugin indent on
@@ -104,7 +103,6 @@ set ignorecase
 set smartcase "overrides ignorecase if uppercase used
 set hlsearch
 syntax on
-set autoread
 set number
 set scrolljump=5
 set scrolloff=3
