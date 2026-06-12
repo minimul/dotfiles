@@ -2,7 +2,6 @@ set nocompatible
 
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'junegunn/fzf', { 'do': './install --all' }
 Plug 'junegunn/vim-easy-align' " horizontal aligning
 Plug 'junegunn/seoul256.vim' " Color scheme
 Plug 'Raimondi/delimitMate' " Adds auto pairing of ', [, etc.

@@ -62,7 +62,9 @@ require("lazy").setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
   },
-
+  -- fzf - Fuzzy Finder
+  { 'junegunn/fzf', build = './install --bin' },
+  { 'junegunn/fzf.vim' },
   -- Color scheme
   {
     "catppuccin/nvim",
