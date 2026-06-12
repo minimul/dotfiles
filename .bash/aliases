@@ -1,5 +1,5 @@
 # Skip when sourced via BASH_ENV from vim/nvim's :! piped shells (e.g. fzf) so aliases don't shadow binaries.
-[[ -t 0 ]] || return
+# [[ -t 0 ]] || return # not needed to run alias from ! in nvim but FZF now doesn't work.
 shopt -s expand_aliases # needed for integrating inside of vim/nvim
 source ~/.bash/functions.sh
 
@@ -56,6 +56,7 @@ if [[ $(uname) == "Linux" ]]; then
 fi
 alias fd='fdfind'
 alias rscp="rsync -ah --progress"
+alias lsrecent='ls -alth | head -n 10'
 alias lastd='ls -t ~/Downloads/ | head -n 1'
 alias lastdp='lastd | pbcopy && echo "$(lastd) copied to clipboard."'
 alias pgkick='echo "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = current_database() AND pid <> pg_backend_pid();"'
@@ -90,3 +91,4 @@ alias claude-jail="~/oss/claude-jail/claude-jail"
 alias rpg="~/oss/rpg-docker-jail/rpg-docker-jail"
 alias encrypt="gpg -c"
 alias vim="nvim"
+alias freechaos-jail="~/oss/chaos-docker-jail/chaos-docker-jail"
