@@ -15,11 +15,8 @@ ln -sf $dir/.vale.ini ~
 ln -sf $dir/.irbrc ~
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-mkdir -p ~/.w3m
-ln -sf $dir/.w3m/keymap ~/.w3m/
-ln -sf $dir/.w3m/config ~/.w3m/
-ln -sf $dir/.w3m/bookmark.html ~/.w3m/
 ln -sf $dir/.tmux.conf ~
+mkdir -p ~/.config/nvim
 ln -sf $dir/init.lua ~/.config/nvim/
 if [[ $(uname) ==  "Darwin" ]]; then
   ln -sf $dir/.bashrc-macos ~/.bashrc
