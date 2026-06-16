@@ -72,26 +72,26 @@ require("lazy").setup({
     priority = 1000, -- Load this first
   },
   {
-    "mfussenegger/nvim-lint",
-    event = { "BufReadPost", "BufWritePost", "InsertLeave" },
-    config = function()
-      local lint = require("lint")
+    -- "mfussenegger/nvim-lint",
+    -- event = { "BufReadPost", "BufWritePost", "InsertLeave" },
+    -- config = function()
+    --   local lint = require("lint")
 
-      -- 1. Assign Vale to your desired filetypes
-      lint.linters_by_ft = {
-        markdown = { "vale" },
-        text = { "vale" },
-        tex = { "vale" }, -- LaTeX support if you use it
-      }
+    --   -- 1. Assign Vale to your desired filetypes
+    --   lint.linters_by_ft = {
+    --     markdown = { "vale" },
+    --     text = { "vale" },
+    --     tex = { "vale" }, -- LaTeX support if you use it
+    --   }
 
-      -- 2. Create an autocmd to trigger linting automatically
-      local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-      vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-        group = lint_augroup,
-        callback = function()
-          lint.try_lint()
-        end,
-      })
-    end,
+    --   -- 2. Create an autocmd to trigger linting automatically
+    --   local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+    --   vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+    --     group = lint_augroup,
+    --     callback = function()
+    --       lint.try_lint()
+    --     end,
+    --   })
+    -- end,
   },
 })
