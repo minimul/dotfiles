@@ -159,4 +159,12 @@ touchpv() {
 decrypt() {
    gpg -d -o "${1%.*}" "$1" && echo "Decrypted to: ${1%.*}"
 }
+
+local_branches_that_are_prs() {
+  for b in $(git for-each-ref --format='%(refname:short)' refs/heads/); do
+    pr=$(gh pr list --head "$b" --state open --json number,url,title \
+          --jq '.[0] | select(.number) | "#\(.number)  \(.title)  \(.url)"')
+    [ -n "$pr" ] && echo "$b  ->  $pr"
+  done
+}
 # WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE OR ~/.bash_profile BEFORE RUNNING
