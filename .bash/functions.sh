@@ -167,4 +167,29 @@ local_branches_that_are_prs() {
     [ -n "$pr" ] && echo "$b  ->  $pr"
   done
 }
+
+pi-work() {
+  model="${1:-openai/gpt-5.6-luna-pro}"
+  pi-jail -- --api-key "$(cat "$HOME/.pi/agent/work-openrouter")" --provider openrouter --model "$model"
+}
+
+pi-work-with-model(){
+  case $1 in
+    "qwen")
+      model=qwen/qwen3.8-27b
+      ;;
+    "sol")
+      model=openai/gpt-5.6-sol
+      ;;
+    "sol-pro")
+      model=openai/gpt-5.6-sol-pro
+      ;;
+    *)
+      echo "Invalid option."
+      ;;
+  esac
+
+  echo "Starting pi-work with the $model..."
+  pi-work $model
+}
 # WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE OR ~/.bash_profile BEFORE RUNNING
