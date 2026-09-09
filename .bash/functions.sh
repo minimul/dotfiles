@@ -169,8 +169,8 @@ local_branches_that_are_prs() {
 }
 
 pi-work() {
-  model="${1:-openai/gpt-5.6-luna-pro}"
-  pi-jail -- --api-key "$(cat "$HOME/.pi/agent/work-openrouter")" --provider openrouter --model "$model"
+  model="${1:-openai/gpt-6-astra}"
+  pi-jail -- --api-key "$(cat "$HOME/.pi/agent/work-openrouter")" --provider openrouter --model "$model" --thinking low
 }
 
 pi-work-with-model(){
@@ -183,6 +183,9 @@ pi-work-with-model(){
       ;;
     "sol-pro")
       model=openai/gpt-5.6-sol-pro
+      ;;
+    "luna-pro")
+      model=openai/gpt-5.6-luna-pro
       ;;
     *)
       echo "Invalid option."
