@@ -195,4 +195,19 @@ pi-work-with-model(){
   echo "Starting pi-work with the $model..."
   pi-work $model
 }
+
+# Copy the newest file in ~/Downloads to the current dir (or a subdirectory),
+# and put the destination path on the clipboard.
+lastdc() {
+  local f dir dest
+  f=$(ls -t ~/Downloads/ | head -n 1)
+  [ -n "$f" ] || { echo "Downloads is empty" >&2; return 1; }
+  dir="${1:-.}"
+  dir="${dir%/}"
+  dest="$dir/$f"
+  cp -i ~/Downloads/"$f" "$dest" || return 1
+  printf '%s' "$dest" | pbcopy
+  echo "$dest copied; path on clipboard."
+}
+
 # WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE OR ~/.bash_profile BEFORE RUNNING
