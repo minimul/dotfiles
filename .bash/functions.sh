@@ -210,4 +210,13 @@ lastdc() {
   echo "$dest copied; path on clipboard."
 }
 
+lsa() {
+ local dir="${1:-.}"
+ command ls -alth -- "$dir" | head -n 20
+}
+
+reduce_image() {
+  local filename=$1
+  convert $filename -auto-orient -resize "${2:-50}"% -strip "${filename%.*}-sm.${filename##*.}"
+}
 # WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE OR ~/.bash_profile BEFORE RUNNING
