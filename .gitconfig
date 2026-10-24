@@ -13,19 +13,17 @@
   sh = stash
   ci = commit
   br = branch
-  brd = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:relative) %09 %(refname:short)'
   co = checkout
   pp = log --pretty=oneline
   di = diff
   dc = diff --cached
   po = push origin
+  pf = push --force-with-lease
   pom = push origin master
   pum = pull origin master
   puum = pull upstream master
   fup = fetch upstream
   com = checkout master
-  pr = "!f() { git fetch -fu ${2:-upstream} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
-  pr-clean = "!git checkout master ; git for-each-ref refs/heads/pr/* --format=\"%(refname)\" | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
   # `git log` with patches shown with difftastic.
   dl = -c diff.external=difft log -p --ext-diff
   # Show the most recent commit with difftastic.
@@ -38,15 +36,10 @@
   tool = vimdiff
 [github]
   user = minimul
-[heroku]
-  account = personal
 [filter "lfs"]
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
   clean = git-lfs clean -- %f
-# Additional manually-configured matchers you may want to add to your .gitconfig
-[diff "rspec"]
-  xfuncname = "^[ \t]*((RSpec|describe|context|it|before|after|around|feature|scenario|background)[ \t].*)$"
 [commit]
   template = ~/.gitmessage

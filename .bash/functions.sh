@@ -169,7 +169,7 @@ local_branches_that_are_prs() {
 }
 
 pi-work() {
-  model="${1:-openai/gpt-6-astra}"
+  model="${1:-openai/gpt-6.1-sol}"
   pi-jail -- --api-key "$(cat "$HOME/.pi/agent/work-openrouter")" --provider openrouter --model "$model" --thinking low
 }
 
@@ -219,4 +219,30 @@ reduce_image() {
   local filename=$1
   convert $filename -auto-orient -resize "${2:-50}"% -strip "${filename%.*}-sm.${filename##*.}"
 }
+
+rails_log_since() {
+  if [ $# -lt 3 ]; then
+    echo "usage: rails_log_since <project_dir> <duration> [log_name] <destination>" >&2
+    echo "  e.g. rails_log_since ~/www/bldup-3000 '1 hour' /tmp/rails_last_hour.log" >&2
+    return 1
+  fi
+  local project_dir=${1%/}
+  local duration=$2
+  local destination=${!#}
+  local log_name=development.log
+  [ $# -ge 4 ] && log_name=$3
+  local log_file=$project_dir/log/$log_name
+  [ -f "$log_file" ] || { echo "rails_log_since: no log at $log_file" >&2; return 1; }
+  local since
+  since=$(date -d "$duration ago" '+%Y-%m-%d %H:%M:%S') || return 1
+
+  awk -v since="$since" 'started || substr($0,1,19) >= since { started = 1; print }' "$log_file" \
+    | sed 's/\x1b\[[0-9;]*m//g' > "$destination"
+}
+
+set_work_passwd() {
+  local user_id=$1
+  dkrunner "User.find($user_id).update(password: ENV['BROWSER_CHECK_PASSWORD'])"
+}
+
 # WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE OR ~/.bash_profile BEFORE RUNNING
