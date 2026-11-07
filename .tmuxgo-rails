@@ -27,14 +27,12 @@ sleep 10
 BLA::stop_loading_animation
 
 # ----
-tmux new-window -t $SESSION -a -n psql-local
+tmux new-window -t $SESSION -a -n 'psql-local & open'
 tmux split-window -h
-tmux select-pane -t 1
-tmux send-keys 'bin/psql-local' 'C-m'
 tmux select-pane -t 0
 tmux send-keys 'bin/psql-local' 'C-m'
 # ----
-tmux new-window -t $SESSION -a -n console
+tmux new-window -t $SESSION -a -n 'console & open'
 tmux split-window -h
 tmux select-pane -t 0
 # ----
@@ -45,7 +43,7 @@ tmux select-pane -t 1
 # tmux split-window -v
 # tmux select-pane -t 2
 # tmux resize-pane -U 20
-tmux send-keys 'aia-chat-premium' 'C-m'
+tmux send-keys 'aia-chat' 'C-m'
 tmux select-pane -t 0
 tmux send-keys 'cha -V' 'C-m'
 # ----
@@ -57,7 +55,7 @@ tmux split-window -h
 tmux select-pane -t 0
 # tmux send-keys 'bldup-claude' 'C-m'
 # ----
-tmux new-window -t $SESSION -a -n AI
+tmux new-window -t $SESSION -a -n PI
 tmux split-window -h
 tmux select-pane -t 0
 # ----
