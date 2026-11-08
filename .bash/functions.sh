@@ -245,4 +245,8 @@ set_work_passwd() {
   dkrunner "User.find($user_id).update(password: ENV['BROWSER_CHECK_PASSWORD'])"
 }
 
+gh-del-branch() {
+ gh api --method DELETE "repos/{owner}/{repo}/git/refs/heads/$1"
+}
+
 # WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE OR ~/.bash_profile BEFORE RUNNING
