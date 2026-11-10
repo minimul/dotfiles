@@ -30,6 +30,7 @@ alias gcaam='git ci --amend -am'
 alias gcaame='git ci --amend --no-edit'
 alias rebasea='git rebase --abort'
 alias rebasec='git rebase --continue'
+alias forcepull='git fetch origin;git reset --hard origin/'
 alias gprc='gh pr create --fill'
 alias lss='ls -alt *.sess'
 alias soa='source ~/.bash/aliases'
@@ -75,13 +76,13 @@ alias dkbundle="dkrails bundle"
 alias dkrunner="dkexec -T rails rails runner"
 alias dkspec="dkrails rspec"
 alias dkparallel-init="dkrake parallel:create parallel:load_schema"
-alias dkparallel="dkrake parallel:spec[4]"
+alias dkparallel="dkrake parallel:spec[2]"
 alias dkcreds="dkexec -e EDITOR=vim rails rails credentials:edit -e"
 alias elinks="docker run -it --rm linuxdojo/elinks-spidermonkey elinks"
 alias dkbundleopen="dkvimrc;dkexec -e EDITOR=vim rails bundle open"
 alias dkgoodjob="dkexec -it rails bundle exec good_job start"
+alias rstbg='dkc restart sidekiq good_job'
 alias tmux-rails="~/oss/dotfiles/.tmuxgo-rails"
-alias bldup-claude="~/bldup-claude -- --dangerously-skip-permissions"
 alias opencode-jail="~/oss/opencode-jail/opencode-jail"
 alias aia-jail="~/oss/aia-jail/aia-jail"
 alias aia-chat="aia-jail -- --chat --tokens --cost -m google/gemini-3.8-flash,openrouter/openai/gpt-6.1-sol"
