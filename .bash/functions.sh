@@ -259,4 +259,8 @@ gh-del-branch() {
  gh api --method DELETE "repos/{owner}/{repo}/git/refs/heads/$1"
 }
 
+dkparallel() {
+  dkrake "parallel:spec[${1:-2}]"
+}
+
 # WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE OR ~/.bash_profile BEFORE RUNNING
