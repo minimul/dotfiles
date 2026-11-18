@@ -263,4 +263,7 @@ dkparallel() {
   dkrake "parallel:spec[${1:-2}]"
 }
 
+ethernet_ip() {
+  ip -4 -o addr show | grep -E '^[0-9]+: (eth[^ ]*|en[^ ]*) ' | awk '{print $4}' | cut -d/ -f1
+}
 # WHEN MAKING CHANGES DO NOT FORGET TO SOURCE THIS FILE OR ~/.bash_profile BEFORE RUNNING
