@@ -169,31 +169,14 @@ local_branches_that_are_prs() {
 }
 
 pi-work() {
-  model="${1:-openai/gpt-6.1-sol}"
-  pi-jail -- --api-key "$(cat "$HOME/.pi/agent/work-openrouter")" --provider openrouter --model "$model" --thinking low
-}
+  local model="openai/gpt-6.1-sol"
 
-pi-work-with-model(){
-  case $1 in
-    "qwen")
-      model=qwen/qwen3.8-27b
-      ;;
-    "sol")
-      model=openai/gpt-5.6-sol
-      ;;
-    "sol-pro")
-      model=openai/gpt-5.6-sol-pro
-      ;;
-    "luna-pro")
-      model=openai/gpt-5.6-luna-pro
-      ;;
-    *)
-      echo "Invalid option."
-      ;;
-  esac
-
-  echo "Starting pi-work with the $model..."
-  pi-work $model
+  pi-jail -- \
+    --api-key "$(cat "$HOME/.pi/agent/work-openrouter")" \
+    --provider openrouter \
+    --model "$model" \
+    --thinking low \
+    "$@" # "$@" forwards all arguments exactly as supplied
 }
 
 # Copy the newest file to the current dir (or a subdirectory),
