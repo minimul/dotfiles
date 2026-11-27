@@ -239,11 +239,11 @@ set_work_passwd() {
 }
 
 gh-del-branch() {
- gh api --method DELETE "repos/{owner}/{repo}/git/refs/heads/$1"
+  gh api --method DELETE "repos/{owner}/{repo}/git/refs/heads/$1"
 }
 
 dkparallel() {
-  dkrake "parallel:spec[${1:-2}]"
+  dkrake "parallel:create[${1:-2}]" && dkrake "parallel:spec[${1:-2}]"
 }
 
 ethernet_ip() {
